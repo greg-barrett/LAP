@@ -17,9 +17,7 @@ class ReservationTest < ActiveSupport::TestCase
   test " reservations should have a reserver" do
     assert_equal @reserver, @reservation.reserver
   end
-  test " reservations should have a reserver" do
-    assert_equal @reserver, @reservation.reserver
-  end
+
   test "party size must be greater than 0" do
     @reservation.party_size=0
     assert_not @reservation.valid?
