@@ -4,8 +4,35 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+reservation1:
+  id: 1
+  arrival_date: Date.today+2
+  departure_date: Date.today+6
+  confirmed: true
+  fee: 50.5
+  party_size: 6
+  notes: "Do you havea teapot?"
+  reserver_id: 1
+  reservation_number: LAP10
+
+reservation2:
+  id: 2
+  arrival_date: Date.today+14
+  departure_date: Date.today+21
+  confirmed: true
+  fee: 70.5
+  party_size: 2
+  notes: "Can I bring a dog"
+  reserver_id: 2
+  reservation_number: LAP15
+
+reservation3:
+  id: 3
+  arrival_date: Date.today+35
+  departure_date: Date.today+42
+  confirmed: true
+  fee: 70.5
+  party_size: 3
+  notes: "Can't wait"
+  reserver_id: 3
+  reservation_number: LAP20

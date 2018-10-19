@@ -1,0 +1,62 @@
+<h1>Reservations Calender</h1>
+<p>See availablity</p>
+
+<h1>The Calender</h1>
+
+
+<% start_date=@start_date || Date.today %>
+<%= start_date.strftime("%B") %>
+<%= start_date.strftime("%Y") %>
+<% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
+
+<%= link_to "Previous", calendar_url(start_date.last_month) %>
+<%= link_to "Next", calendar_url(start_date.next_month) %>
+
+<table>
+  <thead>
+    <% date_range.slice(0, 7).each do |day| %>
+    <th><%= day.strftime("%A") %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <% date_range.each_slice(7) do |week| %>
+    <tr>
+      <% week.each do |day| %>
+      <td>
+        <P><%= day.day %></P>
+        <% if @occupied.include? day  %>
+        <%= "F" %>
+        <% else %>
+        <%= "A" %>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% @occupied.each do |day| %>
+<p><%= day %></p>
+<% end %>
+<%= form_tag(calendar_path, :method => "get", id: "search_form") do %>
+<p>Check Availablitiy for your prefered dates.</p>
+<%= label_tag(:arrival_date, "Arrival Date") %>
+  <%= select_day(Date.today, field_name: 'day', prefix: 'arrival_date') %>
+  <%= select_month(Date.today, field_name: 'month', prefix: 'arrival_date') %>
+  <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'arrival_date') %>
+
+  <%= label_tag(:departure_date, "Departure Date") %>
+    <%= select_day(Date.tomorrow, field_name: 'day', prefix: 'departure_date') %>
+    <%= select_month(Date.today, field_name: 'month', prefix: 'departure_date') %>
+    <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'departure_date') %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @arrival_date %>
+  <% if !@un_availability.blank? %>
+    <%= "Sorry those dates are unavailable" %>
+  <% else %>
+    <%= "Those dates are available, would you like to proceed to book?" %>
+    <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date) %>
+  <% end %>
+<% end %>

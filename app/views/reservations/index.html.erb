@@ -1,0 +1,36 @@
+<h1>Reservations#index</h1>
+<p>See availablity</p>
+
+<h1>The Calender</h1>
+
+<% start_date=Date.today %>
+<%= start_date.strftime("%B") %>
+<% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
+
+<table>
+  <thead>
+    <% date_range.slice(0, 7).each do |day| %>
+    <th><%= day.strftime("%A") %></th>
+    <% end %>
+
+
+  </thead>rails events app
+
+  <tbody>
+    <% date_range.each_slice(7) do |week| %>
+    <tr>
+
+      <% week.each do |day| %>
+      <td>
+        <p>  <%= day.day %></p>
+        <% if @occupied.include? day  %>
+        <%= "Full" %>
+        <% else %>
+        <%= "Available" %>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

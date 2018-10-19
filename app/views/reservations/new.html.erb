@@ -1,0 +1,54 @@
+<h1>Reservations#new</h1>
+<%= form_for @reservation do |f| %>
+<p>Booking Information</p>
+  <%= f.label :Arrival_Date %>
+  <%= f.date_select :arrival_date, :order =>[:day, :month, :year] %><br />
+  <%= f.label :Departure_Date %>
+  <%= f.date_select :departure_date, :order =>[:day, :month, :year] %><br />
+  <%= f.label :party_size %>
+  <%= f.number_field :party_size %><br />
+
+  <%= f.label :notes %>
+  <%= f.text_field :notes %><br />
+<p>Your Details</p>
+  <%= f.fields_for @reserver do |r| %>
+    <%= r.label :title %>
+    <%= r.text_field :title %><br />
+
+    <%= r.label :first_name %>
+    <%= r.text_field :first_name%><br />
+
+    <%= r.label :last_name %>
+    <%= r.text_field :last_name %><br />
+
+    <%= r.label :email_address %>
+    <%= r.email_field :email_address %><br />
+
+    <%= r.label :email_address_confirmation %>
+    <%= r.email_field :email_address_confirmation %><br />
+
+    <%= r.label :contact_number %>
+    <%= r.text_field :contact_number %><br />
+
+    <%= r.label :id_type %>
+    <%= r.text_field :id_type %><br />
+
+    <%= r.label :id_number %>
+    <%= r.text_field :id_number %><br />
+
+    <%= r.label :house_number %>
+    <%= r.text_field :house_number %><br />
+
+    <%= r.label :street_name %>
+    <%= r.text_field :street_name %><br />
+    <%= r.label :city %>
+    <%= r.text_field :city %><br />
+    <%= r.label :country %>
+    <%= r.text_field :country %><br />
+    <%= r.label :postcode %>
+    <%= r.text_field :postcode %><br />
+  <% end %>
+
+
+  <%= f.submit %>
+<% end  %>
