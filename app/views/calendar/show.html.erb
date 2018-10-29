@@ -1,7 +1,8 @@
-<h1>Reservations Calender</h1>
-<p>See availablity</p>
+<h1>Make a bokking</h1>
+<p>Before you prceed please check whether we have availabilty for your dates</p>
+<p>You can browse through our calander or alternatively search query your dates below
 
-<h1>The Calender</h1>
+<h1>Our current Availability </h1>
 
 
 <% start_date=@start_date || Date.today %>
@@ -38,6 +39,7 @@
 <% @occupied.each do |day| %>
 <p><%= day %></p>
 <% end %>
+
 <%= form_tag(calendar_path, :method => "get", id: "search_form") do %>
 <p>Check Availablitiy for your prefered dates.</p>
 <%= label_tag(:arrival_date, "Arrival Date") %>

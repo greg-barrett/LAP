@@ -1,4 +1,5 @@
 class Reserver < ApplicationRecord
+  has_secure_password
   has_many :reservations
   accepts_nested_attributes_for :reservations
   validates :title, :first_name, :last_name, :contact_number,

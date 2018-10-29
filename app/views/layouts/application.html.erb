@@ -9,8 +9,22 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Home", house_path %>
+      <%= link_to "Our Story", about_path %>
+      <%= link_to "Location", location_path %>
+      <%= link_to "Book", calendar_path(Date.today) %>
+    </nav>
+
+    <% if current_reserver %>
+      <p><%= link_to "log Out", client_logout_path %></p>
+    <% else %>
+      <p><%= link_to "Sign Up", client_signup_path  %></p>
+      <p><%= link_to "Sign In", client_login_path  %></p>
+    <% end %>
+
     <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

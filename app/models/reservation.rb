@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
 
   belongs_to :reserver
-  validates :arrival_date, :departure_date, :confirmed, :fee, :party_size, :reserver_id, presence: true
+  validates :arrival_date, :departure_date, :confirmed, :fee, :party_size, presence: true
   validates :party_size, numericality: {greater_than: 0, less_than_or_equal_to: 6}
   validate :dates_must_be_available
   validate :dates_must_be_in_future
@@ -16,6 +16,7 @@ class Reservation < ApplicationRecord
     new_range.each do |date|
       if Reservation.where("arrival_date <= ? AND departure_date >= ?", date, date).exists?
         errors.add(:arrival_date, "It looks like those dates are already booked")
+        return
       end
     end
   end

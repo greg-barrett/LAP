@@ -8,12 +8,18 @@ class CalendarController < ApplicationController
     reservations=Reservation.where(arrival_date: @start_date.beginning_of_month.beginning_of_week..@start_date.end_of_month.end_of_week).or(Reservation.where(departure_date: @start_date.beginning_of_month.beginning_of_week..@start_date.end_of_month.end_of_week))
     @occupied=occupied_dates(reservations)
 
+    #if the user submits date to search for
     if params[:arrival_date]
-      @arrival_date=(params[:arrival_date][:year] + "-" + params[:arrival_date][:month] + "-" + params[:arrival_date][:day]).to_date
-      @departure_date=(params[:departure_date][:year] + "-" + params[:departure_date][:month] + "-" + params[:departure_date][:day]).to_date
-      @un_availability=Reservation.where(arrival_date: @arrival_date..@departure_date).or(Reservation.where(departure_date: @arrival_date..@departure_date)).exists?
-
+      if !date_is_valid?(params[:arrival_date][:day], params[:arrival_date][:month], params[:arrival_date][:year] ) || !date_is_valid?(params[:departure_date][:day], params[:departure_date][:month], params[:departure_date][:year] )
+        flash.now[:alert]="One or more of your dates in not valid"
+        return render :show
+      else
+        @arrival_date=(params[:arrival_date][:year] + "-" + params[:arrival_date][:month] + "-" + params[:arrival_date][:day]).to_date
+        @departure_date=(params[:departure_date][:year] + "-" + params[:departure_date][:month] + "-" + params[:departure_date][:day]).to_date
+        @un_availability=Reservation.where(arrival_date: @arrival_date..@departure_date).or(Reservation.where(departure_date: @arrival_date..@departure_date)).exists?
+      end
     end
+
   end
 
   private

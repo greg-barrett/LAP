@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  #before_action :check_reservation_details, only: [:show]
   def new
     @reservation=Reservation.new
     @reserver=Reserver.new
@@ -57,4 +58,15 @@ class ReservationsController < ApplicationController
   def fee
     @reservation.fee=(@reservation.departure_date- @reservation.arrival_date).to_i * 50
   end
+
+  def check_reservation_details
+    @reserver=Reserver.find_by(email_address: params[:email_address])
+    @reservation=Reservation.where("reservation_number== ? AND reserver_id == ?", params[:reservation_number], @reserver.id )
+    if @reservation
+      true
+    else
+      flash[:error]="Sorry we were unanle to find a reservation with #{params[:email_address]} and reservation number #{params[:reservation_number]}"
+    end
+  end
+
 end

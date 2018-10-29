@@ -48,6 +48,11 @@
   <%= r.label :postcode %>
   <%= r.text_field :postcode, required: true %><br />
 
+  <%= r.label :password %>
+  <%= r.password_field :password, required: true %><br />
+  <%= r.label :password_confirmation %>
+  <%= r.password_field :password_confirmation, required: true %><br />
+
   <p>Booking Information</p>
   <%= r.fields_for @reservation do |f| %>
     <%= f.label :Arrival_Date %>
@@ -62,5 +67,5 @@
   <% end %>
 
 
-  <%= r.submit %>
+  <%= r.submit "Make Reservation" %>
 <% end  %>

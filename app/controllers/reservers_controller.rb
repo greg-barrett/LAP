@@ -8,33 +8,43 @@ class ReserversController < ApplicationController
   end
 
   def create
-    @reserver=Reserver.new(reserver_params)
-    @reserver.save
+    @reserver= Reserver.new(reserver_params)
     @reservation=@reserver.reservations.build(party_size: params[:reserver][:reservation][:party_size], notes: params[:reserver][:reservation][:notes])
-    add_dates()
-    reservation_number()
     @reservation.confirmed=true
-    fee()
-    if @reservation.save || @reserver.valid?
-      redirect_to reservation_path(@reservation)
+    if !date_is_valid?(params[:reserver][:reservation]['arrival_date(1i)'], params[:reserver][:reservation]['arrival_date(2i)'], params[:reserver][:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reserver][:reservation]['departure_date(1i)'], params[:reserver][:reservation]['departure_date(2i)'], params[:reserver][:reservation]['departure_date(3i)'])
+      flash.now[:alert]="One or more of your dates in not valid"
+      return render :new
     else
-      render "reservers/new"
+      add_dates
     end
+    reservation_number
+    fee
+    if @reserver.valid? && @reservation.valid?
+      @reserver.save
+      @reservation.save
+      login
+      redirect_to @reservation
+    else
+      flash.now[:alert]="There is a problem with the data you submitted"
+      render :new
+    end
+
   end
 
   def show
+    @reserver=Reserver.find(params[:id])
 
   end
 
   private
 
   def reserver_params
-    params.require(:reserver).permit(:title, :first_name, :last_name, :email_address, :email_address_confirmation, :contact_number, :id_type, :id_number, :house_number, :street_name, :city, :country, :postcode)
+    params.require(:reserver).permit(:title, :first_name, :last_name, :email_address, :email_address_confirmation, :contact_number, :id_type, :id_number, :house_number, :street_name, :city, :country, :postcode, :password, :password_confirmation)
   end
 
   def add_dates
-    @reservation.arrival_date= (params[:reserver][:reservation]['arrival_date(1i)']+ "-" + params[:reserver][:reservation]['arrival_date(2i)']+ "-" + params[:reserver][:reservation]['arrival_date(3i)']).to_date
-    @reservation.departure_date= (params[:reserver][:reservation]['departure_date(1i)']+ "-" + params[:reserver][:reservation]['departure_date(2i)']+ "-" + params[:reserver][:reservation]['departure_date(3i)']).to_date
+      @reservation.arrival_date= (params[:reserver][:reservation]['arrival_date(1i)']+ "-" + params[:reserver][:reservation]['arrival_date(2i)']+ "-" + params[:reserver][:reservation]['arrival_date(3i)']).to_date
+      @reservation.departure_date= (params[:reserver][:reservation]['departure_date(1i)']+ "-" + params[:reserver][:reservation]['departure_date(2i)']+ "-" + params[:reserver][:reservation]['departure_date(3i)']).to_date
   end
 
   def reservation_number
@@ -46,5 +56,9 @@ class ReserversController < ApplicationController
 
   def fee
     @reservation.fee=(@reservation.departure_date- @reservation.arrival_date).to_i * 50
+  end
+
+  def login
+    session[:reserver_id]=@reserver.id
   end
 end
