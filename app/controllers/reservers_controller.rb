@@ -1,4 +1,6 @@
 class ReserversController < ApplicationController
+  before_action :is_logged_in?, only: [:show, :edit, :update]
+
   def new
     @reservation=Reservation.new
     @reserver=Reserver.new
@@ -33,8 +35,55 @@ class ReserversController < ApplicationController
 
   def show
     @reserver=Reserver.find(params[:id])
+    if !has_access?(@reserver.id)
+      return redirect_to root_url if !is_admin?(current_reserver)
+      return render :show if is_admin?(current_reserver)
+    end
+
+    @errors= params[:errors] || []
 
   end
+
+  def edit
+    @reserver=Reserver.find(params[:id])
+    if has_access?(@reserver.id) ==false
+      return redirect_to root_url
+    end
+  end
+
+  def update
+    @reserver=Reserver.find(params[:id])
+    if has_access?(@reserver.id) ==false
+      return redirect_to root_url
+    end
+    if @reserver && @reserver.authenticate(params[:reserver][:current_password])
+      @reserver.update_attributes(reserver_params)
+      flash[:notice]="Your details have been updatd"
+      redirect_to @reserver
+    else
+      flash[:alert].now="Sorry, something went wrong"
+      render "new"
+    end
+  end
+
+  def search
+    redirect_to root_url if !is_admin?(current_reserver)
+    @errors=[]
+    if params[:email_address] !=""
+      @reserver=Reserver.find_by(email_address: params[:email_address] )
+      @errors << "Couldn't find a client with #{params[:email_address]}." if !@reserver
+      return redirect_to @reserver if @reserver
+    end
+
+
+    if !@errors.any?
+      flash[:alert]="You must fill in the email field"
+      redirect_to current_reserver
+    else
+      redirect_to reserver_path(current_reserver, errors: @errors)
+    end
+  end
+
 
   private
 
@@ -61,4 +110,5 @@ class ReserversController < ApplicationController
   def login
     session[:reserver_id]=@reserver.id
   end
+
 end

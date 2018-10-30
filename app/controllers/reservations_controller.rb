@@ -1,21 +1,42 @@
 class ReservationsController < ApplicationController
-  #before_action :check_reservation_details, only: [:show]
+  before_action :is_logged_in?, only: [:show, :edit, :update, :new, :create]
   def new
-    @reservation=Reservation.new
-    @reserver=Reserver.new
-    @arrival_date= params[:arrival_date] if params[:arrivale_date]
-    @departure_date= params[:departure_date] if params[:departure_date]
-
+    @reservation=Reserver.find(params[:reserver_id]).reservations.build
   end
 
   def edit
+    @reservation=Reservation.find(params[:id])
+    if !has_access?(@reservation.reserver_id)
+      return redirect_to root_url if !is_admin?(current_reserver)
+      return render :edit if is_admin?(current_reserver)
+    end
   end
 
   def update
+    @reservation=Reservation.find(params[:id])
+    if !has_access?(@reservation.reserver_id)
+      return redirect_to root_url if !is_admin?(current_reserver)
+    end
+    if !date_is_valid?(params[:reservation]['arrival_date(1i)'], params[:reservation]['arrival_date(2i)'], params[:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reservation]['departure_date(1i)'], params[:reservation]['departure_date(2i)'], params[:reservation]['departure_date(3i)'])
+      flash.now[:alert]="One or more of your dates in not valid"
+      return render :edit
+    end
+    if  @reservation.update_attributes(arrival_date: arrival_date, departure_date: departure_date, fee: fee, notes: params[:reservation][:notes], party_size: params[:reservation][:party_size])
+      redirect_to @reservation
+      #send email confirmation
+    else
+      flash.now[:alert]="There is a problem with the data you submitted"
+      render :edit
+    end
+
   end
 
   def show
     @reservation=Reservation.find(params[:id])
+    if !has_access?(@reservation.reserver_id)
+      return redirect_to root_url if !is_admin?(current_reserver)
+      return render :show if is_admin?(current_reserver)
+    end
   end
 
   def index
@@ -25,48 +46,80 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reserver=Reserver.new(reservation_params)
-    @reserver.save
-    @reservation=@reserver.reservation.build(reservation_params)
-    add_dates()
-
-    reservation_number()
+    @reservation=current_reserver.reservations.build(reservation_params)
+    if !date_is_valid?(params[:reservation]['arrival_date(1i)'], params[:reservation]['arrival_date(2i)'], params[:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reservation]['departure_date(1i)'], params[:reservation]['departure_date(2i)'], params[:reservation]['departure_date(3i)'])
+      flash.now[:alert]="One or more of your dates in not valid"
+      return render :new
+    else
+      add_dates
+    end
+    reservation_number
+    @reservation.fee=fee
     @reservation.confirmed=true
-    fee()
-    @reservation.save
+    if @reservation.save
+      redirect_to @reservation
+      #send email confirmation
+    else
+      flash.now[:alert]="There is a problem with the data you submitted"
+      render :new
+    end
 
+
+  end
+  def search
+    redirect_to root_url if !is_admin?(current_reserver)
+    @errors=[]
+    if params[:booking_reference] !=""
+      @reservation=Reservation.find_by(reservation_number: params[:booking_reference] )
+      @errors << "Couldn't find a reservation under #{params[:booking_reference]}." if !@reservation
+      return redirect_to @reservation if @reservation
+    end
+
+    if params[:reservation][:arrival_date] !=""
+      @reservation=Reservation.find_by(arrival_date: params[:reservation][:arrival_date] )
+      @errors << "Couldn't find a reservation starting #{params[:reservation][:arrival_date]}." if !@reservation
+      return redirect_to @reservation if @reservation
+    end
+
+    if params[:reservation][:departure_date] !=""
+      @reservation=Reservation.find_by(departure_date: params[:reservation][:departure_date] )
+      @errors << "Couldn't find a reservation ending #{params[:reservation][:departure_date]}." if !@reservation
+      return redirect_to @reservation if @reservation
+    end
+
+    if !@errors.any?
+      flash[:alert]="You must fill in one field"
+      redirect_to current_reserver
+    else
+      redirect_to reserver_path(current_reserver, errors: @errors)
+    end
   end
 
   private
 
   def reservation_params
-    params.require(:reservation).permit(:party_size, :notes, reserver: [:title, :first_name, :last_name, :email_address, :email_address_confirmation, :contact_number, :id_type, :id_number, :house_number, :street_name, :city, :country, :postcode])
+    params.require(:reservation).permit(:party_size, :notes )
   end
-
+  def add_dates
+      @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
+      @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
+  end
   def arrival_date
-    @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
-    @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
+    (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
   end
-
+  def departure_date
+    (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
+  end
   def reservation_number
     last_number=Reservation.last.reservation_number
     last_nuber= last_number.slice(3..-1).to_i
     last_nuber=last_nuber+5
-    @reservation.reservation_number="LAP" + last_nuber
+    @reservation.reservation_number="LAP" + last_nuber.to_s
   end
 
   def fee
-    @reservation.fee=(@reservation.departure_date- @reservation.arrival_date).to_i * 50
+    (departure_date - arrival_date).to_i * 50
   end
 
-  def check_reservation_details
-    @reserver=Reserver.find_by(email_address: params[:email_address])
-    @reservation=Reservation.where("reservation_number== ? AND reserver_id == ?", params[:reservation_number], @reserver.id )
-    if @reservation
-      true
-    else
-      flash[:error]="Sorry we were unanle to find a reservation with #{params[:email_address]} and reservation number #{params[:reservation_number]}"
-    end
-  end
 
 end

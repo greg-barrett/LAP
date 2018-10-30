@@ -12,11 +12,19 @@ class Reservation < ApplicationRecord
 
   def dates_must_be_available
     new_range=(arrival_date..departure_date).to_a
-
-    new_range.each do |date|
-      if Reservation.where("arrival_date <= ? AND departure_date >= ?", date, date).exists?
-        errors.add(:arrival_date, "It looks like those dates are already booked")
-        return
+    if self.id !=nil
+      new_range.each do |date|
+        if Reservation.where("arrival_date <= ? AND departure_date >= ? AND id != ?", date, date, self.id).exists? &&
+          errors.add(:arrival_date, "It looks like those dates are already booked")
+          return
+        end
+      end
+    else
+      new_range.each do |date|
+        if Reservation.where("arrival_date <= ? AND departure_date >= ?", date, date).exists? &&
+          errors.add(:arrival_date, "It looks like those dates are already booked")
+          return
+        end
       end
     end
   end

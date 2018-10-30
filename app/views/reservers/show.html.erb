@@ -1,4 +1,23 @@
 <h1>Reservers Account</h1>
-<p><%= @reserver.first_name  %></p>
-<p><%= @reserver.email_address  %></p>
-<%= render @reserver.reservations  %>
+<p>Hi <%= @reserver.first_name  %></p>
+<% if !is_admin?(@reserver) %>
+  <p><%= link_to "Create a new booking", new_reservation_path(:reserver_id => @reserver.id) %></p>
+  <p><%= link_to "Edit Account", edit_reserver_path(current_reserver)  %>
+  <p>Bookings</p>
+  <p>Upcoming bookings</p>
+  <% future_reservations.each do |reservation|  %>
+    <p><%= link_to reservation.reservation_number, reservation_path(reservation.id)  %></p>
+    <p><%= reservation.arrival_date %></p>
+    <p><%= reservation.departure_date %></p>
+  <% end %>
+  <p>Past bookings</p>
+  <% past_reservations.each do |reservation|  %>
+    <p><%= link_to reservation.reservation_number, reservation_path(reservation.id)  %></p>
+    <p><%= reservation.arrival_date %></p>
+    <p><%= reservation.departure_date %></p>
+    <% end %>
+  <% else %>
+  <%= render "admin_show" %>
+  <%= render "reservers/reservation-search" %>
+  <%= render "reservers/reserver-search" %>
+  <% end %>

@@ -18,6 +18,7 @@
 
     <% if current_reserver %>
       <p><%= link_to "log Out", client_logout_path %></p>
+      <p><%= link_to "My Account", reserver_path(current_reserver) %></p>
     <% else %>
       <p><%= link_to "Sign Up", client_signup_path  %></p>
       <p><%= link_to "Sign In", client_login_path  %></p>

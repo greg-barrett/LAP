@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get '/house', to: "static_pages#house"
   get '/location', to: "static_pages#location"
   get '/enquire', to: "static_pages#enquire"
+  get '/reservations-search', to: "reservations#search"
+  get '/reservers-search', to: "reservers#search"
   resources :reservations
   resources :reservers
   resources :calendar

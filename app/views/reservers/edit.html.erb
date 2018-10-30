@@ -1,0 +1,48 @@
+<%= form_for @reserver do |r| %>
+<p>Your Details</p>
+  <%= r.label :title %>
+  <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
+
+  <%= r.label :first_name %>
+  <%= r.text_field :first_name, required: true %><br />
+
+  <%= r.label :last_name %>
+  <%= r.text_field :last_name, required: true %><br />
+
+  <%= r.label :email_address %>
+  <%= r.email_field :email_address, required: true %><br />
+
+  <%= r.label :email_address_confirmation %>
+  <%= r.email_field :email_address_confirmation, required: true %><br />
+
+  <%= r.label :contact_number %>
+  <%= r.text_field :contact_number, required: true %><br />
+
+  <%= r.label :id_type %>
+  <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
+
+  <%= r.label :id_number %>
+  <%= r.text_field :id_number, required: true %><br />
+
+  <%= r.label :house_number %>
+  <%= r.text_field :house_number, required: true %><br />
+
+  <%= r.label :street_name %>
+  <%= r.text_field :street_name, required: true %><br />
+  <%= r.label :city %>
+  <%= r.text_field :city, required: true %><br />
+  <%= r.label :country %>
+  <%= r.text_field :country, required: true %><br />
+  <%= r.label :postcode %>
+  <%= r.text_field :postcode, required: true %><br />
+<p>If you dont want to change your password leave this area blank</p>
+  <%= r.label :password, "New Password" %>
+  <%= r.password_field :password %><br />
+  <%= r.label :password_confirmation,"New Password Confirmation" %>
+  <%= r.password_field :password_confirmation %><br />
+
+  <p>Please confirm your current password</p>
+  <%= r.label :current_password %>
+  <%= r.password_field :current_password %></br>
+  <%= r.submit %>
+<% end %>

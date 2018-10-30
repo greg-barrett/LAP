@@ -1,0 +1,17 @@
+<h1>Search for a reservation</h1>
+<p>Please fill in at least one field below</p>
+
+  <% @errors.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+
+
+<%= form_tag(reservations_search_path, method:"get") do %>
+<%= label_tag(:booking_reference, "Booking Reference") %>
+<%= text_field_tag (:booking_reference) %></br>
+<%= label_tag(:arrival_date, "Arrival date") %>
+<%= date_field(:reservation, :arrival_date) %></br>
+<%= label_tag(:departure_date, "Departure date") %>
+<%= date_field(:reservation, :departure_date) %></br>
+<%= submit_tag("Search") %>
+<% end %>

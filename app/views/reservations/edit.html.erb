@@ -1,2 +1,23 @@
 <h1>Reservations#edit</h1>
 <p>Find me in app/views/reservations/edit.html.erb</p>
+
+
+<%= form_for @reservation do |f| %>
+<% if @reservation.errors.any? %>
+  <% @reservation.errors.messages.each do |message| %>
+      <p><%= message %></p>
+  <% end %>
+<% end %>
+<p>Booking Information</p>
+<%= f.label :Arrival_Date %>
+<%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true %><br />
+<%= f.label :Departure_Date %>
+<%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true %><br />
+  <%= f.label :party_size %>
+  <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true %><br />
+
+  <%= f.label :notes %>
+  <%= f.text_field :notes %><br />
+
+  <%= f.submit %>
+<% end  %>

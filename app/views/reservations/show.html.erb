@@ -8,4 +8,5 @@
 <p>Departing: <%= @reservation.departure_date %></p>
 <p>Fee: <%= @reservation.fee %></p>
 <p>Notes to the Host: <%= @reservation.notes %></p>
+<p><%= link_to "Ammend", edit_reservation_path(@reservation) %>
 <%= link_to "Home", root_url %>
