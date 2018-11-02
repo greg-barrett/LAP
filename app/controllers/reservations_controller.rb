@@ -6,16 +6,15 @@ class ReservationsController < ApplicationController
 
   def edit
     @reservation=Reservation.find(params[:id])
-    if !has_access?(@reservation.reserver_id)
-      return redirect_to root_url if !is_admin?(current_reserver)
-      return render :edit if is_admin?(current_reserver)
+    unless is_admin?(current_reserver) || has_access?(@reservation.reserver_id)
+      return redirect_to root_url
     end
   end
 
   def update
     @reservation=Reservation.find(params[:id])
-    if !has_access?(@reservation.reserver_id)
-      return redirect_to root_url if !is_admin?(current_reserver)
+    unless is_admin?(current_reserver) || has_access?(@reservation.reserver_id)
+      return redirect_to root_url
     end
     if !date_is_valid?(params[:reservation]['arrival_date(1i)'], params[:reservation]['arrival_date(2i)'], params[:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reservation]['departure_date(1i)'], params[:reservation]['departure_date(2i)'], params[:reservation]['departure_date(3i)'])
       flash.now[:alert]="One or more of your dates in not valid"
@@ -33,9 +32,8 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation=Reservation.find(params[:id])
-    if !has_access?(@reservation.reserver_id)
-      return redirect_to root_url if !is_admin?(current_reserver)
-      return render :show if is_admin?(current_reserver)
+    unless is_admin?(current_reserver) || has_access?(@reservation.reserver_id)
+      return redirect_to root_url
     end
   end
 
@@ -46,7 +44,8 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    @reservation=current_reserver.reservations.build(reservation_params)
+    @reservation=current_reserver.reservations.build(reservation_params) if !is_admin?(current_reserver)
+    @reservation=Reserver.find(params[:reservation][:reserver_id]).reservations.build(reservation_params) if is_admin?(current_reserver)
     if !date_is_valid?(params[:reservation]['arrival_date(1i)'], params[:reservation]['arrival_date(2i)'], params[:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reservation]['departure_date(1i)'], params[:reservation]['departure_date(2i)'], params[:reservation]['departure_date(3i)'])
       flash.now[:alert]="One or more of your dates in not valid"
       return render :new

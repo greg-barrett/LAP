@@ -2,9 +2,7 @@ require 'test_helper'
 
 class ReservationTest < ActiveSupport::TestCase
   def setup
-    @reserver = Reserver.create(first_name: "Test", last_name: "Man", email_address: "j.smith@gmail.com", email_address_confirmation: "j.smith@gmail.com",
-       id_type: "Passport", id_number: "5874589658s", contact_number: "+44 7707302785", title: "Mr",
-     house_number: "01 01 01", street_name: "Cliff Street", city: "Sheffield", country: "Spain", postcode: "BL0 0RY")
+    @reserver = reservers(:john)
 
      @reservation = Reservation.new(arrival_date: Date.tomorrow, departure_date: Date.today+6, party_size: 2, confirmed: true, fee: 300.50, reserver_id: @reserver.id)
 

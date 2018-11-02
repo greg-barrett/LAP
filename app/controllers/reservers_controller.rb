@@ -2,6 +2,10 @@ class ReserversController < ApplicationController
   before_action :is_logged_in?, only: [:show, :edit, :update]
 
   def new
+    if current_reserver && !is_admin?(current_reserver)
+      flash.now[:alert]="You already have an account"
+      redirect_to new_reservation_url(reserver_id => current_reserver.id)
+    end
     @reservation=Reservation.new
     @reserver=Reserver.new
     @reservation.arrival_date=params[:arrival_date] if params[:arrival_date]
@@ -24,7 +28,7 @@ class ReserversController < ApplicationController
     if @reserver.valid? && @reservation.valid?
       @reserver.save
       @reservation.save
-      login
+      login unless logged_in?
       redirect_to @reservation
     else
       flash.now[:alert]="There is a problem with the data you submitted"
@@ -35,9 +39,8 @@ class ReserversController < ApplicationController
 
   def show
     @reserver=Reserver.find(params[:id])
-    if !has_access?(@reserver.id)
-      return redirect_to root_url if !is_admin?(current_reserver)
-      return render :show if is_admin?(current_reserver)
+    unless is_admin?(current_reserver) || has_access?(@reserver.id)
+      return redirect_to root_url
     end
 
     @errors= params[:errors] || []
@@ -46,23 +49,35 @@ class ReserversController < ApplicationController
 
   def edit
     @reserver=Reserver.find(params[:id])
-    if has_access?(@reserver.id) ==false
+    unless is_admin?(current_reserver) || has_access?(@reserver.id)
       return redirect_to root_url
     end
   end
 
   def update
     @reserver=Reserver.find(params[:id])
-    if has_access?(@reserver.id) ==false
-      return redirect_to root_url
-    end
-    if @reserver && @reserver.authenticate(params[:reserver][:current_password])
-      @reserver.update_attributes(reserver_params)
-      flash[:notice]="Your details have been updatd"
-      redirect_to @reserver
-    else
-      flash[:alert].now="Sorry, something went wrong"
-      render "new"
+    if !has_access?(@reserver.id)#you are not the accoutn owner
+      if !is_admin?(current_reserver) #you are not an admin
+        return redirect_to root_url
+      else #youa are not the owner but are an admin
+        if @reserver && current_reserver.authenticate(params[:reserver][:current_password]) #if admin password is correct
+          @reserver.update_attributes(reserver_params)
+          flash[:notice]="Your details have been updated"
+          redirect_to @reserver
+        else
+          flash.now[:alert]="Sorry, something went wrong"
+          render :edit
+        end
+      end
+    else# if you are the account holder
+      if @reserver && @reserver.authenticate(params[:reserver][:current_password]) #if password correct
+        @reserver.update_attributes(reserver_params)
+        flash[:notice]="Your details have been updated"
+        redirect_to @reserver
+      else
+        flash.now[:alert]="Sorry, something went wrong"
+        render :edit
+      end
     end
   end
 
@@ -109,6 +124,9 @@ class ReserversController < ApplicationController
 
   def login
     session[:reserver_id]=@reserver.id
+  end
+  def logged_in?
+    session[:reserver_id] != nil
   end
 
 end

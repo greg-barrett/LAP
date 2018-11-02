@@ -6,20 +6,21 @@
 #
 
 john:
-  id: 1
   title: "Mr"
   first_name: "John"
   last_name: "Smith"
   id_type: "Passport"
   id_number: "87547e7"
   contact_number: "+445879685985"
-  email_address: "jsmith@gmail.com"
-  #email_address_confirmation: "jsmith@gmail.com"
+  email_address: "jjsmith@gmail.com"
+  #email_address_confirmation: "jjsmith@gmail.com"
   house_number: "12"
   street_name: "Old Street"
   city: "Manchester"
   country: "UK"
   postcode: "WF20DR"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false
 
 clare:
   id: 2
@@ -36,6 +37,8 @@ clare:
   city: "Paris"
   country: "France"
   postcode: "784589"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false
 
 Helen:
   id: 3
@@ -52,3 +55,23 @@ Helen:
   city: "London"
   country: "UK"
   postcode: "LS5 3EW"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: false
+
+Admin:
+  id: 4
+  title: "Mr"
+  first_name: "Admin"
+  last_name: "Userh"
+  id_type: "Passport"
+  id_number: "87547e7"
+  contact_number: "+445879685985"
+  email_address: "admin@gmail.com"
+  #email_address_confirmation: "jsmith@gmail.com"
+  house_number: "12"
+  street_name: "Old Street"
+  city: "Manchester"
+  country: "UK"
+  postcode: "WF20DR"
+  password_digest: <%= BCrypt::Password.create('password') %>
+  admin: true

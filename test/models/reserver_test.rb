@@ -2,9 +2,8 @@ require 'test_helper'
 
 class ReserverTest < ActiveSupport::TestCase
   def setup
-    @reserver = Reserver.new(first_name: "John", last_name: "Smith", email_address: "j.smith@gmail.com", email_address_confirmation: "j.smith@gmail.com",
-       id_type: "Passport", id_number: "5874589658s", contact_number: "+44 7707302785", title: "Mr",
-     house_number: "01 01 01", street_name: "Cliff Street", city: "Sheffield", country: "Spain", postcode: "BL0 0RY")
+    @reserver = reservers(:john)
+    @reserver.email_address_confirmation=@reserver.email_address
      @reserver2=Reserver.new
    end
 
