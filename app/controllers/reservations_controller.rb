@@ -1,12 +1,22 @@
 class ReservationsController < ApplicationController
   before_action :is_logged_in?, only: [:show, :edit, :update, :new, :create]
   def new
-    @reservation=Reserver.find(params[:reserver_id]).reservations.build
+    if params[:reserver_id].present?
+      @reservation=Reserver.find(params[:reserver_id]).reservations.build
+    else
+      if is_admin?(current_reserver)
+        flash[:alert]="You can create a new reservation for an existing user by first finding their profile page"
+        return redirect_to current_reserver
+      else
+        @reservation=current_reserver.reservations.build
+      end
+    end
   end
 
   def edit
     @reservation=Reservation.find(params[:id])
     unless is_admin?(current_reserver) || has_access?(@reservation.reserver_id)
+      flash[:alert]="Sorry but you don't have access to that page"
       return redirect_to root_url
     end
   end
@@ -14,6 +24,7 @@ class ReservationsController < ApplicationController
   def update
     @reservation=Reservation.find(params[:id])
     unless is_admin?(current_reserver) || has_access?(@reservation.reserver_id)
+      flash[:alert]="Sorry but you don't have access to that page"
       return redirect_to root_url
     end
     if !date_is_valid?(params[:reservation]['arrival_date(1i)'], params[:reservation]['arrival_date(2i)'], params[:reservation]['arrival_date(3i)']) || !date_is_valid?(params[:reservation]['departure_date(1i)'], params[:reservation]['departure_date(2i)'], params[:reservation]['departure_date(3i)'])
@@ -21,10 +32,10 @@ class ReservationsController < ApplicationController
       return render :edit
     end
     if  @reservation.update_attributes(arrival_date: arrival_date, departure_date: departure_date, fee: fee, notes: params[:reservation][:notes], party_size: params[:reservation][:party_size])
-      redirect_to @reservation
+      return redirect_to @reservation
       #send email confirmation
     else
-      flash.now[:alert]="There is a problem with the data you submitted"
+      flash.now[:alert]="There is an issue with the data you submitted"
       render :edit
     end
 
@@ -90,7 +101,7 @@ class ReservationsController < ApplicationController
       flash[:alert]="You must fill in one field"
       redirect_to current_reserver
     else
-      redirect_to reserver_path(current_reserver, errors: @errors)
+      redirect_to reserver_path(current_reserver)
     end
   end
 

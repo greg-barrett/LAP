@@ -23,7 +23,6 @@ john:
   admin: false
 
 clare:
-  id: 2
   title: "Mrs"
   first_name: "Clare"
   last_name: "Jones"
@@ -41,7 +40,6 @@ clare:
   admin: false
 
 Helen:
-  id: 3
   title: "Miss"
   first_name: "Helen"
   last_name: "Smiles"
@@ -58,8 +56,7 @@ Helen:
   password_digest: <%= BCrypt::Password.create('password') %>
   admin: false
 
-Admin:
-  id: 4
+admin:
   title: "Mr"
   first_name: "Admin"
   last_name: "Userh"

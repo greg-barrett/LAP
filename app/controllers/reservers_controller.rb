@@ -3,8 +3,8 @@ class ReserversController < ApplicationController
 
   def new
     if current_reserver && !is_admin?(current_reserver)
-      flash.now[:alert]="You already have an account"
-      redirect_to new_reservation_url(reserver_id => current_reserver.id)
+      flash[:alert]="You already have an account"
+      redirect_to new_reservation_url(:reserver_id => current_reserver.id)
     end
     @reservation=Reservation.new
     @reserver=Reserver.new
@@ -14,6 +14,10 @@ class ReserversController < ApplicationController
   end
 
   def create
+    if current_reserver && !is_admin?(current_reserver)
+      flash[:alert]="You already have an account"
+      return redirect_to new_reservation_url(:reserver_id => current_reserver.id)
+    end
     @reserver= Reserver.new(reserver_params)
     @reservation=@reserver.reservations.build(party_size: params[:reserver][:reservation][:party_size], notes: params[:reserver][:reservation][:notes])
     @reservation.confirmed=true
@@ -62,40 +66,39 @@ class ReserversController < ApplicationController
       else #youa are not the owner but are an admin
         if @reserver && current_reserver.authenticate(params[:reserver][:current_password]) #if admin password is correct
           @reserver.update_attributes(reserver_params)
-          flash[:notice]="Your details have been updated"
-          redirect_to @reserver
+          flash[:notice]="The client's details have been updated"
+          return redirect_to @reserver
         else
           flash.now[:alert]="Sorry, something went wrong"
-          render :edit
+          return render :edit
         end
       end
     else# if you are the account holder
       if @reserver && @reserver.authenticate(params[:reserver][:current_password]) #if password correct
         @reserver.update_attributes(reserver_params)
         flash[:notice]="Your details have been updated"
-        redirect_to @reserver
+        return redirect_to @reserver
       else
         flash.now[:alert]="Sorry, something went wrong"
-        render :edit
+        return render :edit
       end
     end
   end
 
   def search
-    redirect_to root_url if !is_admin?(current_reserver)
-    @errors=[]
+    return redirect_to root_url if !is_admin?(current_reserver)
+
     if params[:email_address] !=""
       @reserver=Reserver.find_by(email_address: params[:email_address] )
-      @errors << "Couldn't find a client with #{params[:email_address]}." if !@reserver
-      return redirect_to @reserver if @reserver
-    end
-
-
-    if !@errors.any?
-      flash[:alert]="You must fill in the email field"
-      redirect_to current_reserver
+      if @reserver
+        return redirect_to @reserver
+      else
+        flash[:alert]="Couldn't find #{params[:email_address]}"
+        return redirect_to current_reserver
+      end
     else
-      redirect_to reserver_path(current_reserver, errors: @errors)
+      flash[:alert]="You must fill in the email field"
+      return redirect_to current_reserver
     end
   end
 
@@ -112,7 +115,7 @@ class ReserversController < ApplicationController
   end
 
   def reservation_number
-    last_number=Reservation.last.reservation_number
+    last_number=Reservation.last.reservation_number ||"LAP00"
     last_nuber= last_number.slice(3..-1).to_i
     last_nuber=last_nuber+5
     @reservation.reservation_number="LAP" + last_nuber.to_s

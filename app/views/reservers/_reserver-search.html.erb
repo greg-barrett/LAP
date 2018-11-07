@@ -1,11 +1,5 @@
 <h1>Search for a client</h1>
 <p>Please fill in at least one field below</p>
-
-  <% @errors.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
-
-
 <%= form_tag(reservers_search_path, method:"get") do %>
 <%= label_tag(:email_address, "Client Email") %>
 <%= text_field_tag (:email_address) %></br>

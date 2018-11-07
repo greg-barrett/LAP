@@ -5,22 +5,16 @@
   <p><%= link_to "Create a new booking", new_reservation_path(:reserver_id => @reserver.id) %></p>
   <p><%= link_to "Edit Account", edit_reserver_path(@reserver)  %>
   <p>Bookings</p>
-  <p>Upcoming bookings</p>
-  <% future_reservations.each do |reservation|  %>
-    <p><%= link_to reservation.reservation_number, reservation_path(reservation.id)  %></p>
-    <p><%= reservation.arrival_date %></p>
-    <p><%= reservation.departure_date %></p>
-  <% end %>
-  <p>Past bookings</p>
-  <% past_reservations.each do |reservation|  %>
+  <% @reserver.reservations.each do |reservation|  %>
     <p><%= link_to reservation.reservation_number, reservation_path(reservation.id)  %></p>
     <p><%= reservation.arrival_date %></p>
     <p><%= reservation.departure_date %></p>
     <% end %>
-  <% else %>
+
+<% else %>
   <h1>Administrators Account</h1>
   <p>Hi <%= @reserver.first_name  %></p>
   <%= render "reservers/reservation-search" %>
   <%= render "reservers/reserver-search" %>
   <%= link_to "New Reservation & client", new_reserver_path %>
-  <% end %>
+<% end %>

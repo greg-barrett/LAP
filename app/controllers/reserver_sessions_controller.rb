@@ -7,7 +7,7 @@ class ReserverSessionsController < ApplicationController
     if @reserver && @reserver.authenticate(params[:password])
       session[:reserver_id]=@reserver.id
       flash[:notice]="You are now logged in"
-      redirect_to reserver_path(@reserver)
+      return redirect_to reserver_path(@reserver)
     else
       flash.now[:alert]="Email or password is incorrect"
       render "new"
