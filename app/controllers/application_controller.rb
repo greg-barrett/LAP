@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #ensures that someone is legged in
+  #ensures that someone is logged in
     def is_logged_in?
       if current_reserver == nil
         flash[:alert]="Please log in"
@@ -46,6 +46,18 @@ class ApplicationController < ActionController::Base
         user.admin
       end
 
-
+      def add_dates
+          @reservation.arrival_date= (params[:reserver][:reservation]['arrival_date(1i)']+ "-" + params[:reserver][:reservation]['arrival_date(2i)']+ "-" + params[:reserver][:reservation]['arrival_date(3i)']).to_date
+          @reservation.departure_date= (params[:reserver][:reservation]['departure_date(1i)']+ "-" + params[:reserver][:reservation]['departure_date(2i)']+ "-" + params[:reserver][:reservation]['departure_date(3i)']).to_date
+      end
+      def reservation_number
+        last_number=Reservation.last.reservation_number ||"LAP00"
+        last_nuber= last_number.slice(3..-1).to_i
+        last_nuber=last_nuber+5
+        @reservation.reservation_number="LAP" + last_nuber.to_s
+      end
+      def fee
+        @reservation.fee=(@reservation.departure_date- @reservation.arrival_date).to_i * 50
+      end
 
 end

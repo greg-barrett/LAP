@@ -206,7 +206,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
     post reserver_sessions_path, params: {email_address:@admin.email_address, password: "password"}
     get reservation_path(@johns_res)
     assert_template "reservations/show"
-    assert_select "p", {:text => "Arriving: #{Date.today+4}"}
+    assert_select "p", {:text => "Arriving: #{Date.today+200}"}
   end
 
   test "An Admin can create a reservation for another reserver" do
@@ -236,7 +236,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "An admin can search for a reservation by arrival date" do
     post reserver_sessions_path, params: {email_address:@admin.email_address, password: "password"}
-    get reservations_search_path, params: {reservation: {arrival_date: Date.today+4}}
+    get reservations_search_path, params: {reservation: {arrival_date: Date.today+200}}
     assert_redirected_to @johns_res
     follow_redirect!
     assert_select "p", {:text => "Arriving: #{@johns_res.arrival_date}"}
@@ -244,7 +244,7 @@ class ReservationsControllerTest < ActionDispatch::IntegrationTest
 
   test "An admin can search for a reservation by departure date" do
     post reserver_sessions_path, params: {email_address: @admin.email_address, password: "password"}
-    get reservations_search_path, params: {reservation: {departure_date: Date.today+10}}
+    get reservations_search_path, params: {reservation: {departure_date: Date.today+205}}
     assert_redirected_to @johns_res
     follow_redirect!
     assert_select "p", {:text => "Departing: #{@johns_res.departure_date}"}

@@ -115,12 +115,12 @@ class ReserversControllerTest < ActionDispatch::IntegrationTest
                                     "postcode" =>"WF20DR",
                                     "password" =>"password",
                                     "password_confirmation" =>"password",
-                                    "reservation" => {"arrival_date(1i)" => "2018",
-                                    "arrival_date(2i)" => "11",
-                                    "arrival_date(3i)" => "10",
-                                    "departure_date(1i)" => "2018",
-                                    "departure_date(2i)" => "11",
-                                    "departure_date(3i)" => "20",
+                                    "reservation" => {"arrival_date(1i)" => (Date.today+200).year,
+                                    "arrival_date(2i)" => (Date.today+200).month,
+                                    "arrival_date(3i)" => (Date.today+200).day,
+                                    "departure_date(1i)" => (Date.today+205).year,
+                                    "departure_date(2i)" => (Date.today+205).month,
+                                    "departure_date(3i)" => (Date.today+205).day,
                                     "party_size" => "2",
                                     "notes" => "Overlapping dates" }}}
 end

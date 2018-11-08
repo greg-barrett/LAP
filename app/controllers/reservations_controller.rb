@@ -110,26 +110,26 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:party_size, :notes )
   end
-  def add_dates
-      @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
-      @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
-  end
+#  def add_dates
+  #    @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
+  #    @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
+#  end
   def arrival_date
     (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
   end
   def departure_date
     (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
   end
-  def reservation_number
-    last_number=Reservation.last.reservation_number
-    last_nuber= last_number.slice(3..-1).to_i
-    last_nuber=last_nuber+5
-    @reservation.reservation_number="LAP" + last_nuber.to_s
-  end
+#  def reservation_number
+#    last_number=Reservation.last.reservation_number
+  #  last_nuber= last_number.slice(3..-1).to_i
+  #  last_nuber=last_nuber+5
+#    @reservation.reservation_number="LAP" + last_nuber.to_s
+#  end
 
-  def fee
-    (departure_date - arrival_date).to_i * 50
-  end
+#  def fee
+#    (departure_date - arrival_date).to_i * 50
+#  end
 
 
 end

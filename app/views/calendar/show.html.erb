@@ -59,6 +59,7 @@
     <%= "Sorry those dates are unavailable" %>
   <% else %>
     <%= "Those dates are available, would you like to proceed to book?" %>
-    <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date) %>
+    <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date) if !current_reserver || is_admin?(current_reserver) %>
+    <%= link_to "Book Now", new_reservation_path if current_reserver && !is_admin?(current_reserver) %>
   <% end %>
 <% end %>
