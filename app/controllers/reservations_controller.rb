@@ -49,6 +49,18 @@ class ReservationsController < ApplicationController
   end
 
   def index
+    @reserver=Reserver.find(params[:reserver_id])
+    unless is_admin?(current_reserver) || has_access?(@reserver.id)
+      return redirect_to root_url
+    end
+
+    if is_admin?(@reserver)
+      @upcoming_reservations=Reservation.where("arrival_date > ?", Date.today).order("arrival_date")
+      @past_reservations=Reservation.where("arrival_date < ?", Date.today).order("arrival_date")
+    else
+      @upcoming_reservations=@reserver.reservations.where("arrival_date > ?", Date.today).order("arrival_date")
+      @past_reservations=@reserver.reservations.where("arrival_date < ?", Date.today).order("arrival_date")
+    end
   end
 
   def destroy
@@ -87,13 +99,13 @@ class ReservationsController < ApplicationController
 
     if params[:reservation][:arrival_date] !=""
       @reservation=Reservation.find_by(arrival_date: params[:reservation][:arrival_date] )
-      @errors << "Couldn't find a reservation starting #{params[:reservation][:arrival_date]}." if !@reservation
+      @errors << "Couldn't find a reservation starting #{params[:reservation][:arrival_date].strftime("%A %d %B %Y")}." if !@reservation
       return redirect_to @reservation if @reservation
     end
 
     if params[:reservation][:departure_date] !=""
       @reservation=Reservation.find_by(departure_date: params[:reservation][:departure_date] )
-      @errors << "Couldn't find a reservation ending #{params[:reservation][:departure_date]}." if !@reservation
+      @errors << "Couldn't find a reservation ending #{params[:reservation][:departure_date].strftime("%A %d %B %Y")}." if !@reservation
       return redirect_to @reservation if @reservation
     end
 
@@ -101,6 +113,7 @@ class ReservationsController < ApplicationController
       flash[:alert]="You must fill in one field"
       redirect_to current_reserver
     else
+      flash[:alert]=@errors.join(" ")
       redirect_to reserver_path(current_reserver)
     end
   end
@@ -110,10 +123,10 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:party_size, :notes )
   end
-#  def add_dates
-  #    @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
-  #    @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
-#  end
+  def add_dates
+      @reservation.arrival_date= (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
+      @reservation.departure_date= (params[:reservation]['departure_date(1i)']+ "-" + params[:reservation]['departure_date(2i)']+ "-" + params[:reservation]['departure_date(3i)']).to_date
+  end
   def arrival_date
     (params[:reservation]['arrival_date(1i)']+ "-" + params[:reservation]['arrival_date(2i)']+ "-" + params[:reservation]['arrival_date(3i)']).to_date
   end

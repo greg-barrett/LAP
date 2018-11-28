@@ -1,21 +1,31 @@
-<h1>Reservations#new</h1>
-<%= form_for @reservation do |f| %>
-<% if @reservation.errors.any? %>
-  <% @reservation.errors.messages.each do |message| %>
-      <p><%= message %></p>
-  <% end %>
-<% end %>
-<p>Booking Information</p>
-<%= f.hidden_field :reserver_id, value: @reservation.reserver_id %>
-<%= f.label :Arrival_Date %>
-<%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true %><br />
-<%= f.label :Departure_Date %>
-<%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true %><br />
-  <%= f.label :party_size %>
-  <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true %><br />
 
-  <%= f.label :notes %>
-  <%= f.text_field :notes %><br />
+<article class="reservation-show">
+  <section class="reservation-frame green-border">
+    <div class="reservation green-background">
+      <%= form_for @reservation do |f| %>
+      <% if @reservation.errors.any? %>
+        <% @reservation.errors.messages.each do |message| %>
+            <p><%= message %></p>
+        <% end %>
+      <% end %>
+      <h2 class="form-titles">New Reservaton</h2>
+      <% if is_admin?(current_reserver) %>
+        <p class="form-notes">Reservation for: <%= @reservation.reserver.title + " " + @reservation.reserver.last_name%></p>
+        <p class="form-notes"><%= link_to "New customer?", new_reserver_path %></p>
+      <% end %>
+      <%= f.hidden_field :reserver_id, value: @reservation.reserver_id %>
+      <%= f.label :Arrival_Date, class:"std-form-label field-spacing" %><br />
+      <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true, class:"std-input field-spacing" %><br />
+      <%= f.label :Departure_Date, class:"std-form-label field-spacing" %><br />
+      <%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true, class:"std-input field-spacing" %><br />
+        <%= f.label :party_size, class:"std-form-label field-spacing" %><br />
+        <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true, class:"std-input field-spacing" %><br />
 
-  <%= f.submit %>
-<% end  %>
+        <%= f.label :notes, class:"std-form-label field-spacing" %><br />
+        <%= f.text_field :notes, class:"std-input field-spacing" %><br />
+
+        <%= f.submit "Reserve", class:"std-form-btn" %>
+      <% end  %>
+    </div>
+  </section>
+</article>

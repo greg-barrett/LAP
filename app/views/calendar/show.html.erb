@@ -1,65 +1,88 @@
-<h1>Make a bokking</h1>
-<p>Before you prceed please check whether we have availabilty for your dates</p>
-<p>You can browse through our calander or alternatively search query your dates below
+<article class="calender">
+  <section class="hero">
+    <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
+    <div class="frame pink-border">
+      <div class="title-box pink-background">
+        <h1 class="location-title">Reserve</h1>
+      </div>
+    </div>
+  </section>
 
-<h1>Our current Availability </h1>
+  <section class="description-pane description-pane-padding">
+    <%= @reserver_id %>
+    <div class="one-half">
+      <div class="focus-description">
+        <h2>Check our Availability</h2>
+        <p>Before making your reservation, please check that your prefered dates are available.
+          You can do this by submitting your dates below or browsing our calendar.
+        </p>
+      </div>
+      <div class="pink-border search-form-frame">
+        <%= form_tag(calendar_path, :method => "get", id: "search_form", class:"thick-pink-background") do %>
+        <%= label_tag(:arrival_date, "Arrival Date", class: "std-form-label select-spacing") %></br>
+          <%= select_day(Date.tomorrow, field_name: 'day', prefix: 'arrival_date' )%>
+          <%= select_month(Date.tomorrow, field_name: 'month', prefix: 'arrival_date') %>
+          <%= select_year(Date.tomorrow, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'arrival_date') %></br>
 
+          <%= label_tag(:departure_date, "Departure Date", class: "std-form-label select-spacing") %></br>
+            <%= select_day(Date.tomorrow+1, field_name: 'day', prefix: 'departure_date') %>
+            <%= select_month(Date.tomorrow+1, field_name: 'month', prefix: 'departure_date') %>
+            <%= select_year(Date.tomorrow+1, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'departure_date') %></br>
+          <%= submit_tag "Search", class: "std-form-btn field-spacing" %>
 
-<% start_date=@start_date || Date.today %>
-<%= start_date.strftime("%B") %>
-<%= start_date.strftime("%Y") %>
-<% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
-
-<%= link_to "Previous", calendar_url(start_date.last_month) %>
-<%= link_to "Next", calendar_url(start_date.next_month) %>
-
-<table>
-  <thead>
-    <% date_range.slice(0, 7).each do |day| %>
-    <th><%= day.strftime("%A") %></th>
-    <% end %>
-  </thead>
-  <tbody>
-    <% date_range.each_slice(7) do |week| %>
-    <tr>
-      <% week.each do |day| %>
-      <td>
-        <P><%= day.day %></P>
-        <% if @occupied.include? day  %>
-        <%= "F" %>
-        <% else %>
-        <%= "A" %>
+          <% if @arrival_date %>
+            <% if !@un_availability.blank? %>
+              <p class="search-message"><%= "Sorry those dates are unavailable" %></p>
+            <% else %>
+              <p class="search-message"><%= "Those dates are available." %></p>
+              <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date), class: "std-form-btn" if !current_reserver || is_admin?(current_reserver) %>
+              <%= link_to "Book Now", new_reservation_path, class: "std-form-btn" if current_reserver && !is_admin?(current_reserver) %>
+            <% end %>
+          <% end %>
         <% end %>
-      </td>
-      <% end %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
-<% @occupied.each do |day| %>
-<p><%= day %></p>
-<% end %>
 
-<%= form_tag(calendar_path, :method => "get", id: "search_form") do %>
-<p>Check Availablitiy for your prefered dates.</p>
-<%= label_tag(:arrival_date, "Arrival Date") %>
-  <%= select_day(Date.today, field_name: 'day', prefix: 'arrival_date') %>
-  <%= select_month(Date.today, field_name: 'month', prefix: 'arrival_date') %>
-  <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'arrival_date') %>
 
-  <%= label_tag(:departure_date, "Departure Date") %>
-    <%= select_day(Date.tomorrow, field_name: 'day', prefix: 'departure_date') %>
-    <%= select_month(Date.today, field_name: 'month', prefix: 'departure_date') %>
-    <%= select_year(Date.today, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'departure_date') %>
-  <%= submit_tag "Search" %>
-<% end %>
+      </div>
+    </div>
 
-<% if @arrival_date %>
-  <% if !@un_availability.blank? %>
-    <%= "Sorry those dates are unavailable" %>
-  <% else %>
-    <%= "Those dates are available, would you like to proceed to book?" %>
-    <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date) if !current_reserver || is_admin?(current_reserver) %>
-    <%= link_to "Book Now", new_reservation_path if current_reserver && !is_admin?(current_reserver) %>
-  <% end %>
-<% end %>
+    <div class="one-half calendar-area">
+      <section class="the-calendar">
+        <% start_date=@start_date || Date.today %>
+        <% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
+        <div class="calendar-head">
+          <%= link_to "Previous", calendar_url(start_date.last_month) %>
+          <h3><%= start_date.strftime("%B") %> <%= start_date.strftime("%Y") %></h3>
+          <%= link_to "Next", calendar_url(start_date.next_month) %>
+        </div>
+        <table class="calendar-table">
+          <thead>
+            <% date_range.slice(0, 7).each do |day| %>
+            <th><%= day.strftime("%A") %></th>
+            <% end %>
+          </thead>
+          <tbody>
+            <% date_range.each_slice(7) do |week| %>
+            <tr>
+              <% week.each do |day| %>
+                <% if @occupied.include? day  %>
+                  <td class="occupied tooltip">
+                    <P><%= day.day %></P>
+                    <span class="tooltiptext">Un-Available</span>
+                  </td>
+                <% else %>
+                  <td class="available tooltip">
+                    <P><%= day.day %></P>
+                    <span class="tooltiptext">Available</span>
+                  </td>
+                <% end %>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+        <%= link_to "Book Now", new_reserver_path, class: "book-btn" if !current_reserver || is_admin?(current_reserver) %>
+        <%= link_to "Book Now", new_reservation_path, class: "book-btn" if current_reserver && !is_admin?(current_reserver) %>
+    </div>
+  </section>
+</article>

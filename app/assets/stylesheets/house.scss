@@ -1,0 +1,104 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$pink: #e2c0cc;
+$pale-pink-fade: rgba(247, 241, 239, .9);
+$pale-blue: #bbd2e8;
+$pale-pink: #f7f1ef;
+$green: #a3b6a6;
+$purple: #b59cba;
+$font-grey: #5a5151;
+$fancy-font: 'Sacramento', cursive;
+$body-font: 'Cormorant Garamond', serif;
+//borders and backgrounds
+
+.blue-background {
+  background-color: rgba(187,	210,	232, .4);
+}
+.blue-border {
+  border: 10px solid rgba(187,	210,	232, .9);
+}
+.green-background {
+  background-color: rgba(163, 182, 166, .7);
+}
+.green-border {
+  border: 10px solid rgba(163, 182, 166, .9);
+}
+
+.pink-background {
+  background-color: rgba(247, 241, 239, .7);
+}
+.thick-pink-background {
+  background-color: rgba(247, 241, 239, 1);
+}
+.pink-border {
+  border: 10px solid rgba(247, 241, 239, .9);
+}
+.house-container {
+  background-color: rgba(247, 241, 239, .5);
+}
+.title-pane {
+  position: relative;
+  padding: 200px 0;
+  h1 {
+    font-family: $fancy-font;
+    text-align: center;
+    font-size: 10em;
+    color: $font-grey;
+    padding: 60px 60px 30px 60px;
+    vertical-align: middle;
+    margin: 20px;
+  }
+}
+
+.title-frame {
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translate(-50%);
+}
+.room-pane {
+  position: relative;
+
+}
+#room-img-main {
+  width: 80%;
+  display: block;
+  padding: 20px;
+  margin: auto;
+}
+
+.description-pane {
+  position: relative;
+  overflow: auto;
+}
+.description-pane-padding {
+  padding: 100px 0;
+}
+.one-half {
+  width: 50%;
+  float: left;
+}
+.focus-description {
+  position: relative;
+  width: 80%;
+  display: block;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  h2 {
+    font-family: $fancy-font;
+    font-size: 4em;
+    padding: 20px 0;
+  }
+  p {
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+}
+#room-img-sub {
+  width: 80%;
+  display: block;
+  padding: 20px;
+  margin: auto;
+}

@@ -1,17 +1,21 @@
-<h1>Search for a reservation</h1>
-<p>Please fill in at least one field below</p>
-
-  <% @errors.each do |message| %>
-    <p><%= message %></p>
+<div class="admin-form green-border">
+  <%= form_tag(reservations_search_path, method:"get", class: "green-background query-form") do %>
+    <h2 class="form-titles">Search Reservations</h2>
+    <p class="form-notes">Please fill in at least one field below</p>
+    <% if @errors.any? %>
+      <div class="form-errors">
+        <p>There is an issue with the data you submitted.</p>
+        <% @errors.each do |message| %>
+            <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <%= label_tag(:booking_reference, "Booking Reference", :class =>"std-form-label field-spacing") %></br>
+    <%= text_field_tag(:booking_reference, "", class: "std-input field-spacing") %></br>
+    <%= label_tag(:arrival_date, "Arrival date", :class =>"std-form-label field-spacing") %></br>
+    <%= date_field(:reservation, :arrival_date, class: "std-input field-spacing") %></br>
+    <%= label_tag(:departure_date, "Departure date", :class =>"std-form-label field-spacing") %></br>
+    <%= date_field(:reservation, :departure_date, class: "std-input field-spacing") %></br>
+    <%= submit_tag("Search", :class =>"std-form-btn") %>
   <% end %>
-
-
-<%= form_tag(reservations_search_path, method:"get") do %>
-<%= label_tag(:booking_reference, "Booking Reference") %>
-<%= text_field_tag (:booking_reference) %></br>
-<%= label_tag(:arrival_date, "Arrival date") %>
-<%= date_field(:reservation, :arrival_date) %></br>
-<%= label_tag(:departure_date, "Departure date") %>
-<%= date_field(:reservation, :departure_date) %></br>
-<%= submit_tag("Search") %>
-<% end %>
+</div>

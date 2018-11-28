@@ -1,3 +1,30 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.reservation-show {
+  position: relative;
+  width:100%;
+}
+
+.reservation-frame {
+  position: relative;
+  display: inline-block;
+  top: 50vh;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  margin: auto;
+  width: 50%;
+
+}
+.reservation {
+  padding-bottom: 20px;
+  margin: 10px;
+  text-align: center;
+  h2 {
+    font-size: 2em;
+    line-height: 2em;
+  }
+  a:hover {
+    color: white;
+  }
+}

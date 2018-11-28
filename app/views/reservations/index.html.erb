@@ -1,36 +1,57 @@
-<h1>Reservations#index</h1>
-<p>See availablity</p>
+<section class="welcome-area green-background">
+  <div class="welcome-instructions">
+    <h2>Reservations</h2>
+  </div>
+</section>
 
-<h1>The Calender</h1>
-
-<% start_date=Date.today %>
-<%= start_date.strftime("%B") %>
-<% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
-
-<table>
-  <thead>
-    <% date_range.slice(0, 7).each do |day| %>
-    <th><%= day.strftime("%A") %></th>
-    <% end %>
-
-
-  </thead>rails events app
-
-  <tbody>
-    <% date_range.each_slice(7) do |week| %>
-    <tr>
-
-      <% week.each do |day| %>
-      <td>
-        <p>  <%= day.day %></p>
-        <% if @occupied.include? day  %>
-        <%= "Full" %>
-        <% else %>
-        <%= "Available" %>
+<section class="profile-main">
+  <section class="one-half">
+    <h2 class="form-titles">Past Reservations</h2>
+    <% if @past_reservations.any? %>
+      <% @past_reservations.each do |reservation|  %>
+        <%= link_to reservation_path(reservation.id) do  %>
+          <div class="search-form-frame green-border b-marg">
+            <div class="upcoming-stays green-background">
+              <% if is_admin?(current_reserver) %>
+                <p class="dates"><%= "Client: " + reservation.reserver.title+ " " + reservation.reserver.last_name %></p>
+              <% end %>
+              <p class="dates"><%= "Arriving: " + reservation.arrival_date.strftime("%A %d %B %Y")  %></p>
+              <p class="dates"><%= "Reservation Number: " + reservation.reservation_number  %></p>
+            </div>
+          </div>
         <% end %>
-      </td>
       <% end %>
-    </tr>
+    <% else %>
+      <div class="search-form-frame green-border b-marg">
+        <div class="upcoming-stays green-background">
+          <p class="dates">There are no prior reservations.</p>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </section>
+
+  <section class="one-half">
+    <h2 class="form-titles">Future Reservations</h2>
+    <% if @upcoming_reservations.any? %>
+      <% @upcoming_reservations.each do |reservation|  %>
+        <%= link_to reservation_path(reservation.id) do  %>
+          <div class="search-form-frame green-border b-marg">
+            <div class="upcoming-stays green-background">
+              <% if is_admin?(current_reserver) %>
+                <p class="dates"><%= "Client: " + reservation.reserver.title+ " " + reservation.reserver.last_name %></p>
+              <% end %>
+              <p class="dates"><%= "Arriving: " + reservation.arrival_date.strftime("%A %d %B %Y")  %></p>
+              <p class="dates"><%= "Reservation Number: " + reservation.reservation_number  %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <div class="search-form-frame green-border b-marg">
+        <div class="upcoming-stays green-background">
+          <p class="dates">There are no future reservations.</p>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</section>

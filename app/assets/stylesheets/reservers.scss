@@ -1,3 +1,97 @@
 // Place all the styles related to the Reservers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.split-form {
+  width: 70%;
+  margin:auto;
+}
+.new-reserver-pane {
+  padding: 100px 0;
+}
+.welcome-area {
+  padding: 40px 0;
+  h2 {
+    font-family: 'Sacramento', cursive;
+    margin-bottom: 20px;
+    font-size: 3em;
+  }
+}
+.profile-main {
+  padding: 50px 20px;
+  overflow: auto;
+}
+.welcome-instructions {
+  text-align: center;
+  p {
+    font-size: 1.4em;
+    line-height: 1.3em;
+  }
+}
+.upcoming-stays {
+  margin: 10px;
+  text-align:center;
+  padding: 20px 10px;
+  h2 {
+    font-family: 'Sacramento', cursive;
+    margin-bottom: 20px;
+    font-size: 3em;
+  }
+}
+
+
+.dates {
+  font-size: 1.3em;
+  line-height: 1.3em;
+  :hover {
+    color: white;
+  }
+}
+.option {
+  line-height: 4em;
+  margin: 0 10px 30px 10px;
+  text-align:center;
+  padding: 10px 10px;
+  h2 {
+    font-family: 'Sacramento', cursive;
+    font-size: 3em;
+    line-height: 1.8em;
+    :hover {
+      color: white;
+    }
+  }
+}
+.admin-form {
+  width: 80%;
+  margin: auto;
+}
+.query-form {
+
+  padding: 20px;
+}
+.form-titles {
+  font-family: 'Sacramento', cursive;
+  font-size: 3em;
+  line-height: 1.8em;
+  text-align: center;
+}
+.form-notes {
+  font-size: 1.2em;
+  line-height: 2em;
+}
+.admin-reserve-button {
+  margin: auto;
+  width: 80%;
+  margin-top: 20px;
+}
+.l-pad {
+  padding-bottom: 20px;
+}
+
+.t-marg {
+  margin-top: 40px;
+}
+
+.b-marg {
+  margin-bottom: 20px;
+}

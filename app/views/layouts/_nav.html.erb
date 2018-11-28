@@ -1,0 +1,20 @@
+<button id="menu-btn" class="hamburger hamburger--squeeze" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+
+
+<nav class="menu">
+  <%= link_to "Home", root_url %>
+  <%= link_to "La Maison", house_path %>
+  <%= link_to "Our Story", about_path %>
+  <%= link_to "Location", location_path %>
+  <%= link_to "Reserve", calendar_path(Date.today) %>
+  <% if current_reserver %>
+    <%= link_to "My Account", reserver_path(current_reserver) %>
+    <%= link_to "Log Out", client_logout_path %>
+  <% else %>
+    <%= link_to "Log In", client_login_path  %>
+  <% end %>
+</nav>

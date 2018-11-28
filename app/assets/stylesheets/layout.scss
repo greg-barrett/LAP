@@ -1,0 +1,62 @@
+//colors
+$pink: #e2c0cc;
+$pale-pink-fade: rgba(247, 241, 239, .8);
+$pale-blue: #bbd2e8;
+$pale-pink: #f7f1ef;
+$green: #a3b6a6;
+$purple: #b59cba;
+$font-grey: #5a5151;
+$fancy-font: 'Sacramento', cursive;
+$body-font: 'Cormorant Garamond', serif;
+
+body {
+  font-family: $body-font;
+  color: $font-grey;
+}
+.app-container {
+  position: relative;
+}
+
+.hamburger {
+  position: fixed;
+  z-index: 2;
+  left: 10px;
+  top: 10px;
+  height: 50px;
+  width: 50px;
+  background-color: $pale-pink-fade;
+}
+
+.menu {
+  position: fixed;
+  z-index: 1;
+  background-color: $pale-pink-fade;
+  height: 100vh;
+  padding-top: 60px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0px;
+  transition: width 1s;
+  a{
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    font-size: 2em;
+    padding-left: 70px;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+.expand {
+  width: 300px;
+}
+.alert {
+  //position: fixed;
+  padding: 20px 0;
+  background-color: $purple;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+  font-size: 1.3em;
+}

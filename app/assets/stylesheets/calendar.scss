@@ -1,3 +1,89 @@
 // Place all the styles related to the Calendar controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.calendar-area {
+  text-align:  center;
+  
+}
+.the-calendar {
+  padding-top: 50px;
+}
+.calendar-table {
+  width: 90%;
+  margin: auto;
+}
+.calendar-head {
+  margin-bottom: 20px;
+  a, h3 {
+    display: inline-block;
+
+  }
+  h3 {
+    margin: 0 5%;
+    font-size: 2em;
+  }
+  a {
+    font-size: 1.3em;
+  }
+}
+.calendar-table {
+  border-collapse: collapse;
+  thead {
+    font-size: 1.2em;
+  }
+  th {
+    height: 1.5em;
+    width: 14.2%;
+  }
+  td {
+    height: 86px;
+    border: 2px solid #fff;
+    vertical-align: middle;
+    font-size: 1.2em; position: relative;
+  }
+}
+.occupied {
+  background-color: rgba(247, 241, 239, .2);
+}
+.available {
+  background-color: rgba(247, 241, 239, .8);
+}
+.tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgba(247, 241, 239, .8);
+        color: #5a5151;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+    left: -25%;
+    top: 80%;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.search-form-frame {
+  width: 80%;
+  margin: auto;
+}
+
+.book-btn {
+  display: inline-block;
+  background-color: white;
+  border: 5px solid rgba(247, 241, 239, 1);
+  padding: 15px;
+  font-size: 1.8em;
+  font-family: 'Cormorant Garamond', serif;
+  margin-top: 15px;
+}
+
+.book-btn:hover {
+  background-color: rgba(247, 241, 239, 1);
+  border-color: grey;
+}

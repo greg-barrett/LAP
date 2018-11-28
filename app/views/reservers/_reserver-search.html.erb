@@ -1,7 +1,9 @@
-<h1>Search for a client</h1>
-<p>Please fill in at least one field below</p>
-<%= form_tag(reservers_search_path, method:"get") do %>
-<%= label_tag(:email_address, "Client Email") %>
-<%= text_field_tag (:email_address) %></br>
-<%= submit_tag("Search") %>
-<% end %>
+<div class="admin-form green-border t-marg">
+
+  <%= form_tag(reservers_search_path, method:"get", class: "green-background query-form") do %>
+  <h2 class="form-titles">Search Clients</h2>
+    <%= label_tag(:email_address, "Client Email", class:"std-form-label field-spacing") %>
+    <%= text_field_tag(:email_address, "", class:"std-input field-spacing") %></br>
+    <%= submit_tag("Search", class: "std-form-btn") %>
+  <% end %>
+</div>

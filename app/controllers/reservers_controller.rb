@@ -2,6 +2,11 @@ class ReserversController < ApplicationController
   before_action :is_logged_in?, only: [:show, :edit, :update]
 
   def new
+    if cookies.encrypted[:reserver_id]
+      id=cookies.encrypted[:reserver_id]
+      cookies.delete :reserver_id
+      return redirect_to new_reservation_url(:reserver_id => id)
+    end
     if current_reserver && !is_admin?(current_reserver)
       flash[:alert]="You already have an account"
       redirect_to new_reservation_url(:reserver_id => current_reserver.id)
@@ -45,6 +50,11 @@ class ReserversController < ApplicationController
     @reserver=Reserver.find(params[:id])
     unless is_admin?(current_reserver) || has_access?(@reserver.id)
       return redirect_to root_url
+    end
+    if is_admin?(@reserver)
+      @upcoming_reservations=Reservation.where(arrival_date: Date.today..Date.today+30).order("arrival_date")
+    else
+      @upcoming_reservations=@reserver.reservations.where("arrival_date >= ?", Date.today).order("arrival_date")
     end
 
     @errors= params[:errors] || []
@@ -93,7 +103,7 @@ class ReserversController < ApplicationController
       if @reserver
         return redirect_to @reserver
       else
-        flash[:alert]="Couldn't find #{params[:email_address]}"
+        flash[:alert]="Couldn't find a client with the emails address #{params[:email_address]}"
         return redirect_to current_reserver
       end
     else

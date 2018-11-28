@@ -3,6 +3,7 @@ class CalendarController < ApplicationController
     redirect_to calendar_url(Date.today)
   end
   def show
+    cookies.encrypted[:reserver_id]=params[:reserver_id] if params[:reserver_id]
     @start_date=params[:id].to_date if params[:id]
     #find the reservations with either an arrival dat or a departure date within the current month
     reservations=Reservation.where(arrival_date: @start_date.beginning_of_month.beginning_of_week..@start_date.end_of_month.end_of_week).or(Reservation.where(departure_date: @start_date.beginning_of_month.beginning_of_week..@start_date.end_of_month.end_of_week))

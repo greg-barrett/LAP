@@ -1,3 +1,84 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+  position: relative;
+}
+.hero {
+  height: 100vh;
+  /*gets sizing from photo*/
+}
+#bk-home {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+/*displays the border and positions the title center*/
+.home-frame {
+  border: 10px solid rgba(247, 241, 239, .9);
+}
+.frame {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+  top: 50vh;
+  left: 50%;
+  transform:translate(-50%, -50%);
+
+}
+/*holds the title and shows background*/
+.title-box {
+  position: relative;
+  display: inline-block;
+  padding: 50px;
+}
+.home-box {
+  background-color: rgba(247, 241, 239, .8);
+}
+/*page title*/
+.title {
+  font-size: 150px;
+  text-align: center;
+  font-family: 'Sacramento', cursive;
+}
+
+//welcome area
+.welcome {
+  background-color: rgba(247, 241, 239, .5);
+  padding: 100px 0;
+  overflow: auto;
+}
+
+#front-door {
+  width: 80%;
+  margin-left: 10%;
+  padding-top: 100px;
+}
+.two-third {
+  width: 66.66%;
+  float: left;
+  h2 {
+    font-family: 'Sacramento', cursive;
+    font-size: 6em;
+    padding: 50px 0 25px 50px;
+  }
+  p {
+    padding: 0 100px;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+  h3 {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.5em;
+    text-align: center;
+    padding: 50px;
+
+  }
+
+}
+
+.one-third {
+  width: 33.33%;
+  float: left;
+}

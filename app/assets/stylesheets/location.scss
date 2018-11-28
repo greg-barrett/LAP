@@ -1,0 +1,9 @@
+$fancy-font: 'Sacramento', cursive;
+$body-font: 'Cormorant Garamond', serif;
+.location-title {
+  font-size: 12em;
+  font-family: $fancy-font;
+}
+.std-background {
+  background-color: rgba(247, 241, 239, .9);
+}

@@ -1,0 +1,35 @@
+<section class="welcome-area green-background">
+  <div class="welcome-instructions">
+    <h2>Administrator's Area</h2>
+    <p>You are logged in as <%= @reserver.first_name  %> <%= @reserver.last_name  %></p>
+  </div>
+</section>
+<section class="profile-main">
+  <section class="one-half">
+    <%= render "reservers/reservation-search" %>
+    <%= render "reservers/reserver-search" %>
+  </section>
+
+  <section class="one-half">
+    <div class="option search-form-frame green-border">
+      <div class="option-content green-background">
+        <h2><%= link_to "All Reservations", reservations_path(:reserver_id => @reserver.id) %></h2>
+      </div>
+    </div>
+    <div class="option search-form-frame green-border">
+      <div class="option-content green-background">
+        <h2><%= link_to "New Reservation & client", calendar_path %></h2>
+      </div>
+    </div>
+
+    <div class="option search-form-frame green-border">
+      <div class="option-content green-background l-pad">
+        <h2> Upcoming Stays</h2>
+        <% @upcoming_reservations.each do |reservation|  %>
+          <p class="dates"><%= link_to reservation.arrival_date.strftime("%A %d %B %Y"), reservation_path(reservation.id)  %></p>
+        <% end %>
+      </div>
+    </div>
+
+  </section>
+</section>

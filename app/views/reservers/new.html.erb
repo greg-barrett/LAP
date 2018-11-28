@@ -1,72 +1,79 @@
-<h1>Book</h1>
-<h2>If you already have an account you can <%= link_to "login",  client_login_path %> here.</h2>
-<% if @reserver.errors.any? %>
-  <% @reserver.errors.messages.each do |message| %>
-      <p><%= message %></p>
-  <% end %>
-<% end %>
-<% if @reservation.errors.any? %>
-  <% @reservation.errors.messages.each do |message| %>
-      <p><%= message %></p>
-  <% end %>
-<% end %>
+<article class="new-reserver-pane">
+    <div class="pink-border search-form-frame">
+    <%= form_for @reserver, html: { class: "thick-pink-background"}  do |r| %>
+    <h1>Reserve</h1>
+    <% if !current_reserver %>
+      <p>Already have an account? <%= link_to "Login",  client_login_path %></p>
+    <% end %>
+    <% if @reserver.errors.any? %>
+      <div class="form-errors">
+        <p>There is an issue with the data you submitted.</p>
+        <% @reserver.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
 
-<%= form_for @reserver do |r| %>
-<p>Your Details</p>
-  <%= r.label :title %>
-  <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
+    <div class="one-half">
+      <div class="split-form">
+        <h2>Your Details</h2>
+        <%= r.label :title, class:"std-form-label select-spacing" %>
+        <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
 
-  <%= r.label :first_name %>
-  <%= r.text_field :first_name, required: true %><br />
+        <%= r.label :first_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :first_name, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :last_name %>
-  <%= r.text_field :last_name, required: true %><br />
+        <%= r.label :last_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :last_name, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :contact_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :contact_number, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :email_address %>
-  <%= r.email_field :email_address, required: true %><br />
+        <%= r.label :id_type, class:"std-form-label select-spacing" %>
+        <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
 
-  <%= r.label :email_address_confirmation %>
-  <%= r.email_field :email_address_confirmation, required: true %><br />
+        <%= r.label :id_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :id_number, required: true, class:"std-input field-spacing" %><br />
+        <h2>Home Address</h2>
+        <%= r.label :house_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :house_number, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :contact_number %>
-  <%= r.text_field :contact_number, required: true %><br />
+        <%= r.label :street_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :street_name, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :city, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :city, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :country, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :country, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :postcode, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :postcode, required: true, class:"std-input field-spacing" %><br />
+      </div>
+    </div>
+    <div class="one-half">
+      <div class="split-form second-split">
+        <h2>Account Details</h2>
+        <%= r.label :email_address, class:"std-form-label field-spacing" %><br />
+        <%= r.email_field :email_address, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :id_type %>
-  <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
+        <%= r.label :email_address_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.email_field :email_address_confirmation, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :password, class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :password, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :password_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :password_confirmation, required: true, class:"std-input field-spacing" %><br />
+        <h2>Booking Information</h2>
+        <%= r.fields_for @reservation do |f| %>
+          <%= f.label :Arrival_Date, class:"std-form-label select-spacing" %><br />
+          <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true, :class=>"select-spacing" %><br />
+          <%= f.label :Departure_Date, class:"std-form-label select-spacing" %><br />
+          <%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true %><br />
+          <%= f.label :party_size, class:"std-form-label select-spacing" %>
+          <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true %><br />
 
-  <%= r.label :id_number %>
-  <%= r.text_field :id_number, required: true %><br />
-
-  <%= r.label :house_number %>
-  <%= r.text_field :house_number, required: true %><br />
-
-  <%= r.label :street_name %>
-  <%= r.text_field :street_name, required: true %><br />
-  <%= r.label :city %>
-  <%= r.text_field :city, required: true %><br />
-  <%= r.label :country %>
-  <%= r.text_field :country, required: true %><br />
-  <%= r.label :postcode %>
-  <%= r.text_field :postcode, required: true %><br />
-
-  <%= r.label :password %>
-  <%= r.password_field :password, required: true %><br />
-  <%= r.label :password_confirmation %>
-  <%= r.password_field :password_confirmation, required: true %><br />
-
-  <p>Booking Information</p>
-  <%= r.fields_for @reservation do |f| %>
-    <%= f.label :Arrival_Date %>
-    <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true %><br />
-    <%= f.label :Departure_Date %>
-    <%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true %><br />
-    <%= f.label :party_size %>
-    <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true %><br />
-
-    <%= f.label :notes %>
-    <%= f.text_field :notes %><br />
-  <% end %>
-
-
-  <%= r.submit "Make Reservation" %>
-<% end  %>
+          <%= f.label :notes, class:"std-form-label field-spacing" %>
+          <%= f.text_field :notes, class:"std-input field-spacing" %><br />
+        <% end %>
+        <%= r.submit "Reserve", class: "std-form-btn" %>
+      </div>
+      </div>
+    <% end  %>
+  </div>
+</article>

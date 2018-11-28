@@ -1,48 +1,66 @@
-<%= form_for @reserver do |r| %>
-<p>Your Details</p>
-  <%= r.label :title %>
-  <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
+<article class="new-reserver-pane">
+    <div class="green-border search-form-frame">
+    <%= form_for @reserver, html: { class: "green-background edit_reserver_form"}  do |r| %>
+    <h2 class="form-titles">Edit Details</h2>
+    <% if @reserver.errors.any? %>
+      <div class="form-errors">
+        <p>There is an issue with the data you submitted.</p>
+        <% @reserver.errors.full_messages.each do |message| %>
+            <p><%= message %></p>
+        <% end %>
+      </div>
+    <% end %>
 
-  <%= r.label :first_name %>
-  <%= r.text_field :first_name, required: true %><br />
+    <div class="one-half">
+      <div class="split-form">
+        <%= r.label :title, class:"std-form-label select-spacing" %>
+        <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
 
-  <%= r.label :last_name %>
-  <%= r.text_field :last_name, required: true %><br />
+        <%= r.label :first_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :first_name, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :email_address %>
-  <%= r.email_field :email_address, required: true %><br />
+        <%= r.label :last_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :last_name, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :contact_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :contact_number, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :email_address_confirmation %>
-  <%= r.email_field :email_address_confirmation, required: true %><br />
+        <%= r.label :id_type, class:"std-form-label select-spacing" %>
+        <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
 
-  <%= r.label :contact_number %>
-  <%= r.text_field :contact_number, required: true %><br />
+        <%= r.label :id_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :id_number, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :house_number, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :house_number, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :id_type %>
-  <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
+        <%= r.label :street_name, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :street_name, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :city, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :city, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :country, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :country, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :postcode, class:"std-form-label field-spacing" %><br />
+        <%= r.text_field :postcode, required: true, class:"std-input field-spacing" %><br />
+      </div>
+    </div>
+    <div class="one-half">
+      <div class="split-form second-split">
+        <%= r.label :email_address, class:"std-form-label field-spacing" %><br />
+        <%= r.email_field :email_address, required: true, class:"std-input field-spacing" %><br />
+        <%= r.label :email_address_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.email_field :email_address_confirmation, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :id_number %>
-  <%= r.text_field :id_number, required: true %><br />
+        <%= r.label :password, "New Password", class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :password, class:"std-input field-spacing" %><br />
+        <%= r.label :password_confirmation,"New Password Confirmation", class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :password_confirmation, class:"std-input field-spacing" %><br />
 
-  <%= r.label :house_number %>
-  <%= r.text_field :house_number, required: true %><br />
+        <p>Please confirm your current password</p>
+        <%= r.label :current_password, class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :current_password, required: true, class:"std-input field-spacing" %><br />
 
-  <%= r.label :street_name %>
-  <%= r.text_field :street_name, required: true %><br />
-  <%= r.label :city %>
-  <%= r.text_field :city, required: true %><br />
-  <%= r.label :country %>
-  <%= r.text_field :country, required: true %><br />
-  <%= r.label :postcode %>
-  <%= r.text_field :postcode, required: true %><br />
-<p>If you dont want to change your password leave this area blank</p>
-  <%= r.label :password, "New Password" %>
-  <%= r.password_field :password %><br />
-  <%= r.label :password_confirmation,"New Password Confirmation" %>
-  <%= r.password_field :password_confirmation %><br />
-
-  <p>Please confirm your current password</p>
-  <%= r.label :current_password %>
-  <%= r.password_field :current_password %></br>
-  <%= r.submit %>
-<% end %>
+        <%= r.submit "Update", class: "std-form-btn" %>
+      </div>
+      </div>
+    <% end  %>
+  </div>
+</article>

@@ -1,8 +1,13 @@
-<h1>Log into your account with Reservations</h1>
-<%= form_tag reserver_sessions_path do |f| %>
-<%= label_tag :email_address %>
-<%= text_field_tag :email_address %></br>
-<%= label_tag :password %>
-<%= password_field_tag :password %></br>
-<%=  submit_tag "Log in" %>
-<% end %>
+<section class="hero">
+  <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
+  <div class="frame pink-border">
+    <div class="title-box pink-background login-box">
+      <h2>Login</h2>
+      <%= form_tag reserver_sessions_path do |f| %>
+        <%= text_field_tag :email_address, nil,  placeholder: "example@email.com", class: "std-input field-spacing" %></br>
+        <%= password_field_tag :password, nil,  placeholder: "Password", class:"std-input field-spacing" %></br>
+        <%=  submit_tag "Submit", class: "std-form-btn" %>
+      <% end %>
+    </div>
+  </div>
+</section>
