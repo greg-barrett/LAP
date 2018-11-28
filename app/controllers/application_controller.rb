@@ -51,7 +51,13 @@ class ApplicationController < ActionController::Base
           @reservation.departure_date= (params[:reserver][:reservation]['departure_date(1i)']+ "-" + params[:reserver][:reservation]['departure_date(2i)']+ "-" + params[:reserver][:reservation]['departure_date(3i)']).to_date
       end
       def reservation_number
-        last_number=Reservation.last.reservation_number ||"LAP00"
+        reservation=Reservation.last
+        if reservation===nil
+          last_number="LAP00"
+        else
+          last_number=reservation.reservation_number
+        end
+        
         last_nuber= last_number.slice(3..-1).to_i
         last_nuber=last_nuber+5
         @reservation.reservation_number="LAP" + last_nuber.to_s
