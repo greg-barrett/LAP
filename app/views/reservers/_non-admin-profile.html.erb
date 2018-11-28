@@ -21,7 +21,7 @@
   <section class="one-half">
     <div class="option search-form-frame green-border">
       <div class="option-content green-background">
-        <h2><%= link_to "Create a new booking", calendar_path(:reserver_id => @reserver.id) %></h2>
+        <h2><%= link_to "Create a new booking", calendar_path(Date.today, :reserver_id => @reserver.id) %></h2>
       </div>
     </div>
 
