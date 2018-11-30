@@ -17,17 +17,9 @@ $body-font: 'Cormorant Garamond', serif;
   position: relative;
 }
 
-.title-frame {
-  position: absolute;
-  display: inline-block;
-  padding: 20px;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%, -50%);
-}
+
 .room-pane {
   position: relative;
-
 }
 #room-img-main {
   width: 80%;
@@ -66,5 +58,5 @@ $body-font: 'Cormorant Garamond', serif;
   width: 80%;
   display: block;
   padding: 20px;
-  margin: auto;
+  margin: 75px auto 0 auto;
 }

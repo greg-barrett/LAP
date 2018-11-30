@@ -1,0 +1,99 @@
+
+//limmit of mobile and tablet
+@media only screen and (max-width: 1025px) {
+  .one-third, .two-third, .one-half {
+    width: 100%;
+  }
+  .door-frame {
+    width: 60%;
+    margin-top: 50px;
+  }
+  .hamburger {
+    width: 70px;
+    height: 70px;
+  }
+  .hamburger-box {
+    width: 40px;
+ }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+  }
+  .hamburger-inner::before {
+    top: -12px; }
+  .hamburger-inner::after {
+    bottom: -12px;
+  }
+  .description-pane-padding {
+    padding: 50px 0 50px 0;
+  }
+  .focus-description {
+    width: 85%;
+    padding: 0 0 80px 0;
+
+  }
+  #room-img-main {
+    width: 95%;
+    padding: 10px;
+    margin: auto;
+  }
+  #room-img-sub {
+    width: 95%;
+    display: block;
+    padding: 10px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    font-size: 10px;
+  }
+  p {
+    font-size: 2.5em
+  }
+  .title-box {
+    padding: 20px;
+  }
+  .signed {
+    font-size: 3em;
+  }
+
+
+}
+@media screen and (max-width: 600px) {
+  .two-third h2 {
+      padding: 0 0 15px 20px;
+  }
+  .two-third p {
+      padding: 0 30px;
+  }
+  .door-frame {
+    width: 90%;
+    padding: 20px;
+    margin: 30px auto 0 auto;
+  }
+  .focus-description {
+    p {
+      text-align: justify;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  #bk-home {
+    height: auto;
+    width: 100%;
+  }
+  body {
+    font-size: 6px;
+  }
+  .title-pane {
+    height: 50vh;
+  }
+
+  .med-heading {
+    font-size: 6em;
+  }
+
+
+}

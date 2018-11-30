@@ -18,7 +18,16 @@
   background-color: transparent;
   border: 0;
   margin: 0;
-  overflow: visible; }
+  overflow: visible;
+  position: fixed;
+  z-index: 2;
+  left: 10px;
+  top: 10px;
+  height: 50px;
+  width: 50px;
+  background-color: rgba(247, 241, 239, .8);
+
+}
 
 .hamburger-box {
   width: 20px;
