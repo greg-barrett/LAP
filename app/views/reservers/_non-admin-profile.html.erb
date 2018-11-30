@@ -1,6 +1,6 @@
 <section class="welcome-area green-background">
   <div class="welcome-instructions">
-    <h2>Salut <%= @reserver.title + " " + @reserver.last_name %>!</h2>
+    <h1 class="med-heading">Salut <%= @reserver.title + " " + @reserver.last_name %>!</h1>
     <p>From here you are ablle to review your upcoming bookings and create new ones.</p>
     <p>You can also ammend upcoming bookings and your personal deatils</p>
     <p>If you have any questions or want to get in touch, email us at lap@gmail.com</p>
@@ -10,7 +10,7 @@
   <section class="one-half">
     <div class="search-form-frame green-border">
       <div class="upcoming-stays green-background">
-        <h2> Upcoming Stays</h2>
+        <h2 class="normal-heading"> Upcoming Stays</h2>
         <% @upcoming_reservations.each do |reservation|  %>
           <p class="dates"><%= link_to reservation.arrival_date.strftime("%A %d %B %Y"), reservation_path(reservation.id)  %></p>
         <% end %>
@@ -21,19 +21,19 @@
   <section class="one-half">
     <div class="option search-form-frame green-border">
       <div class="option-content green-background">
-        <h2><%= link_to "Create a new booking", calendar_path(Date.today, :reserver_id => @reserver.id) %></h2>
+        <h2 class="normal-heading"><%= link_to "Create a new booking", calendar_path(Date.today, :reserver_id => @reserver.id) %></h2>
       </div>
     </div>
 
     <div class="option search-form-frame green-border">
       <div class="option-content green-background">
-        <h2><%= link_to "All Reservations", reservations_path(:reserver_id => @reserver.id) %></h2>
+        <h2 class="normal-heading"><%= link_to "All Reservations", reservations_path(:reserver_id => @reserver.id) %></h2>
       </div>
     </div>
 
     <div class="option search-form-frame green-border">
       <div class="option-content green-background">
-        <h2><%= link_to "Update my Details", edit_reserver_path(@reserver)  %></h2>
+        <h2 class="normal-heading"><%= link_to "Update my Details", edit_reserver_path(@reserver)  %></h2>
       </div>
     </div>
   </section>

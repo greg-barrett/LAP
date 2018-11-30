@@ -1,8 +1,7 @@
 <section class="hero">
-  <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
-  <div class="frame pink-border">
-    <div class="title-box pink-background login-box">
-      <h2>Login</h2>
+  <div class="title-frame rose-border">
+    <div class="title-box rose-background-strong login-box">
+      <h2 class="med-heading">Login</h2>
       <%= form_tag reserver_sessions_path do |f| %>
         <%= text_field_tag :email_address, nil,  placeholder: "example@email.com", class: "std-input field-spacing" %></br>
         <%= password_field_tag :password, nil,  placeholder: "Password", class:"std-input field-spacing" %></br>
@@ -10,4 +9,5 @@
       <% end %>
     </div>
   </div>
+  <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
 </section>

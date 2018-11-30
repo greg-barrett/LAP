@@ -1,5 +1,5 @@
 
-<article class="reservation-show">
+<article class="reservation-show green-bkg-pale">
   <section class="reservation-frame green-border">
     <div class="reservation green-background">
       <%= form_for @reservation do |f| %>
@@ -8,10 +8,10 @@
             <p><%= message %></p>
         <% end %>
       <% end %>
-      <h2 class="form-titles">New Reservaton</h2>
+      <h2 class="med-heading">New Reservaton</h2>
       <% if is_admin?(current_reserver) %>
-        <p class="form-notes">Reservation for: <%= @reservation.reserver.title + " " + @reservation.reserver.last_name%></p>
-        <p class="form-notes"><%= link_to "New customer?", new_reserver_path %></p>
+        <p>Reservation for: <%= @reservation.reserver.title + " " + @reservation.reserver.last_name%></p>
+        <p><%= link_to "New customer?", new_reserver_path %></p>
       <% end %>
       <%= f.hidden_field :reserver_id, value: @reservation.reserver_id %>
       <%= f.label :Arrival_Date, class:"std-form-label field-spacing" %><br />

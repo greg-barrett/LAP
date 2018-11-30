@@ -1,0 +1,62 @@
+$rose: #e2c0cc;
+$pale-blue: #bbd2e8;
+$pale-pink: #f7f1ef;
+$green: #a3b6a6;
+$purple: #b59cba;
+$font-grey: #5a5151;
+$pale-pink-fade: rgba(247, 241, 239, .9);
+
+$fancy-font: 'Sacramento', cursive;
+$body-font: 'Cormorant Garamond', serif;
+//borders and backgrounds
+.white-bkg {
+  background-color: white;
+}
+.rose-background {
+  background-color: rgba(226,	192, 204, .4);
+}
+.rose-background-strong {
+  background-color: rgba(226,	192, 204, .8);
+}
+.rose-bkg-pale {
+  background-color: rgba(226,	192, 204, .2);
+}
+.rose-border {
+  border: 10px solid rgba(226,	192, 204, .9);
+}
+.purple-background {
+  background-color: rgba(181,	156,	186, .4);
+}
+.purple-bkg-pale {
+  background-color: rgba(181,	156,	186, .2);
+}
+.purple-border {
+  border: 10px solid rgba(181,	156,	186, .9);
+}
+.blue-background {
+  background-color: rgba(187,	210,	232, .4);
+}
+.blue-bkg-pale {
+  background-color: rgba(187,	210,	232, .2);
+}
+.blue-border {
+  border: 10px solid rgba(187,	210,	232, .9);
+}
+.green-background {
+  background-color: rgba(163, 182, 166, .7);
+}
+.green-bkg-pale {
+  background-color: rgba(163, 182, 166, .2);
+}
+.green-border {
+  border: 10px solid rgba(163, 182, 166, .9);
+}
+.pink-background {
+  background-color: rgba(247, 241, 239, .7);
+}
+.solid-pink-background {
+  background-color: rgba(247, 241, 239, 1);
+}
+.pink-border {
+  border: 10px solid rgba(247, 241, 239, .9);
+}

@@ -1,17 +1,17 @@
-<article class="reservation-show">
+<article class="reservation-show green-bkg-pale">
   <section class="reservation-frame green-border">
     <div class="reservation green-background">
       <h2><%= @reservation.reservation_number %></h2>
-      <p class="form-notes">Arriving: <%= @reservation.arrival_date.strftime("%A %d %B %Y") %></p>
-      <p class="form-notes">Departing: <%= @reservation.departure_date.strftime("%A %d %B %Y") %></p>
-      <p class="form-notes">Fee: <%= @reservation.fee %></p>
-      <p class="form-notes">Notes to the Host</p>
-      <p class="form-notes"><%= @reservation.notes %></p>
-      <p class="form-notes"><%= link_to "Ammend Reservation", edit_reservation_path(@reservation) %></p>
+      <p>Arriving: <%= @reservation.arrival_date.strftime("%A %d %B %Y") %></p>
+      <p>Departing: <%= @reservation.departure_date.strftime("%A %d %B %Y") %></p>
+      <p>Fee: <%= @reservation.fee %></p>
+      <p>Notes to the Host</p>
+      <p><%= @reservation.notes %></p>
+      <p><%= link_to "Ammend Reservation", edit_reservation_path(@reservation) %></p>
       <% if is_admin?(current_reserver) %>
-        <p class="form-notes"><%= link_to "Client: " + @reservation.reserver.title + " " + @reservation.reserver.last_name , @reservation.reserver %></p>
+        <p><%= link_to "Client: " + @reservation.reserver.title + " " + @reservation.reserver.last_name , @reservation.reserver %></p>
       <% else %>
-        <p class="form-notes"><%= link_to "My Account" , @reservation.reserver %></p>
+        <p><%= link_to "My Account" , @reservation.reserver %></p>
       <% end %>
     </div>
   </section>

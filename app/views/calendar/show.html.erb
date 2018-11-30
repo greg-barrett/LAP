@@ -1,24 +1,24 @@
 <article class="calender">
   <section class="hero">
-    <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
-    <div class="frame pink-border">
+    <div class="title-frame pink-border">
       <div class="title-box pink-background">
-        <h1 class="location-title">Reserve</h1>
+        <h1 class="title">Book</h1>
       </div>
     </div>
+    <%= image_tag "gate.jpg", id: "bk-home", alt: "Open gate in a field" %>
   </section>
 
   <section class="description-pane description-pane-padding">
     <%= @reserver_id %>
     <div class="one-half">
       <div class="focus-description">
-        <h2>Check our Availability</h2>
+        <h2 class="med-heading">Check our Availability</h2>
         <p>Before making your reservation, please check that your prefered dates are available.
           You can do this by submitting your dates below or browsing our calendar.
         </p>
       </div>
-      <div class="pink-border search-form-frame">
-        <%= form_tag(calendar_path, :method => "get", id: "search_form", class:"thick-pink-background") do %>
+      <div class="rose-border search-form-frame">
+        <%= form_tag(calendar_path, :method => "get", id: "search_form", class:"rose-background") do %>
         <%= label_tag(:arrival_date, "Arrival Date", class: "std-form-label select-spacing") %></br>
           <%= select_day(Date.tomorrow, field_name: 'day', prefix: 'arrival_date' )%>
           <%= select_month(Date.tomorrow, field_name: 'month', prefix: 'arrival_date') %>

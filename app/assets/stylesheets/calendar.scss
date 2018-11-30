@@ -3,11 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .calendar-area {
   text-align:  center;
-  
+  padding-top: 80px;
 }
-.the-calendar {
-  padding-top: 50px;
-}
+
 .calendar-table {
   width: 90%;
   margin: auto;
@@ -23,7 +21,7 @@
     font-size: 2em;
   }
   a {
-    font-size: 1.3em;
+    font-size: 1.5em;
   }
 }
 .calendar-table {
@@ -37,53 +35,51 @@
   }
   td {
     height: 86px;
-    border: 2px solid #fff;
+    border: 4px solid #fff;
     vertical-align: middle;
-    font-size: 1.2em; position: relative;
+    font-size: 1.2em;
+    position: relative;
   }
 }
 .occupied {
-  background-color: rgba(247, 241, 239, .2);
+  background-color: rgba(226,	192,	204, .1);
 }
 .available {
-  background-color: rgba(247, 241, 239, .8);
+  background-color: rgba(226,	192,	204, 1);
 }
 .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: rgba(247, 241, 239, .8);
-        color: #5a5151;
+    background-color: rgba(226,	192,	204, 1);
+    color: #5a5151;
     text-align: center;
     padding: 5px 0;
-    border-radius: 6px;
+    border-radius: 2px;
 
     /* Position the tooltip text - see examples below! */
     position: absolute;
     z-index: 1;
-    left: -25%;
     top: 80%;
+    left: 0;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
-.search-form-frame {
-  width: 80%;
-  margin: auto;
-}
+
 
 .book-btn {
   display: inline-block;
   background-color: white;
-  border: 5px solid rgba(247, 241, 239, 1);
+  border: 5px solid rgba(226,	192,	204, .9);
   padding: 15px;
-  font-size: 1.8em;
+  font-size: 1.5em;
   font-family: 'Cormorant Garamond', serif;
   margin-top: 15px;
 }
 
 .book-btn:hover {
-  background-color: rgba(247, 241, 239, 1);
+  background-color: rgba(226,	192,	204, 1);
   border-color: grey;
 }

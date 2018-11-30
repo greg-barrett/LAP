@@ -1,12 +1,12 @@
 <section class="welcome-area green-background">
   <div class="welcome-instructions">
-    <h2>Reservations</h2>
+    <h2 class="large-sub-h">Reservations</h2>
   </div>
 </section>
 
 <section class="profile-main">
   <section class="one-half">
-    <h2 class="form-titles">Past Reservations</h2>
+    <h2 class="med-heading res-h">Past Reservations</h2>
     <% if @past_reservations.any? %>
       <% @past_reservations.each do |reservation|  %>
         <%= link_to reservation_path(reservation.id) do  %>
@@ -31,7 +31,7 @@
   </section>
 
   <section class="one-half">
-    <h2 class="form-titles">Future Reservations</h2>
+    <h2 class="med-heading res-h">Future Reservations</h2>
     <% if @upcoming_reservations.any? %>
       <% @upcoming_reservations.each do |reservation|  %>
         <%= link_to reservation_path(reservation.id) do  %>

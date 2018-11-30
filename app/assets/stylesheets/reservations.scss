@@ -4,8 +4,11 @@
 .reservation-show {
   position: relative;
   width:100%;
+  height: 100vh;
 }
-
+.res-h {
+  margin-bottom: 20px;
+}
 .reservation-frame {
   position: relative;
   display: inline-block;
@@ -21,7 +24,7 @@
   margin: 10px;
   text-align: center;
   h2 {
-    font-size: 2em;
+    font-size: 3em;
     line-height: 2em;
   }
   a:hover {

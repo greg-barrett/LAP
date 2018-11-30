@@ -1,7 +1,7 @@
-<article class="new-reserver-pane">
-    <div class="pink-border search-form-frame">
-    <%= form_for @reserver, html: { class: "thick-pink-background"}  do |r| %>
-    <h1>Reserve</h1>
+<article class="new-reserver-pane pink-background">
+    <div class="rose-border search-form-frame">
+    <%= form_for @reserver, html: { class: "rose-bkg-pale"}  do |r| %>
+    <h1 class="med-heading">Reserve</h1>
     <% if !current_reserver %>
       <p>Already have an account? <%= link_to "Login",  client_login_path %></p>
     <% end %>

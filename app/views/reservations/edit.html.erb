@@ -1,4 +1,4 @@
-<article class="reservation-show">
+<article class="reservation-show green-bkg-pale">
   <section class="reservation-frame green-border">
     <div class="reservation green-background">
       <%= form_for @reservation do |f| %>
@@ -7,7 +7,7 @@
             <p><%= message %></p>
           <% end %>
         <% end %>
-        <h2 class="form-titles">Booking Information</h2>
+        <h2 class="normal-heading">Booking Information</h2>
         <%= f.label :Arrival_Date, class:"std-form-label field-spacing" %><br />
         <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true, class:"std-input field-spacing" %><br />
         <%= f.label :Departure_Date, class:"std-form-label field-spacing" %><br />

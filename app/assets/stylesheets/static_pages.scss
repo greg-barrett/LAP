@@ -5,27 +5,21 @@
   position: relative;
 }
 .hero {
-  height: 100vh;
-  /*gets sizing from photo*/
+  position: relative;
 }
 #bk-home {
   height: 100vh;
   width: 100%;
-  position: absolute;
-  z-index: -1;
 }
 /*displays the border and positions the title center*/
-.home-frame {
-  border: 10px solid rgba(247, 241, 239, .9);
-}
-.frame {
-  position: relative;
+
+.title-frame {
+  position: absolute;
   display: inline-block;
   padding: 20px;
-  top: 50vh;
+  top: 50%;
   left: 50%;
   transform:translate(-50%, -50%);
-
 }
 /*holds the title and shows background*/
 .title-box {
@@ -33,12 +27,13 @@
   display: inline-block;
   padding: 50px;
 }
-.home-box {
-  background-color: rgba(247, 241, 239, .8);
-}
+
 /*page title*/
+.les {
+  white-space: nowrap;
+}
 .title {
-  font-size: 150px;
+  font-size: 10em;
   text-align: center;
   font-family: 'Sacramento', cursive;
 }
@@ -46,39 +41,60 @@
 //welcome area
 .welcome {
   background-color: rgba(247, 241, 239, .5);
-  padding: 100px 0;
+  padding: 50px 0;
   overflow: auto;
 }
 
 #front-door {
-  width: 80%;
-  margin-left: 10%;
-  padding-top: 100px;
+  display:inline-block;
+  width: 100%;
+
+
+}
+.door-frame {
+  width: 90%;
+  padding: 20px;
+  margin: 121px auto 0 auto;
 }
 .two-third {
   width: 66.66%;
   float: left;
   h2 {
-    font-family: 'Sacramento', cursive;
-    font-size: 6em;
-    padding: 50px 0 25px 50px;
+    padding: 0 0 25px 50px;
   }
+
   p {
     padding: 0 100px;
-    font-size: 1.5em;
-    line-height: 1.5em;
   }
+
   h3 {
-    font-family: 'Sacramento', cursive;
-    font-size: 2.5em;
-    text-align: center;
     padding: 50px;
-
   }
-
 }
-
+p {
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
+.signed {
+  font-family: 'Sacramento', cursive;
+  font-size: 2.5em;
+  text-align: center;
+}
+.large-sub-h {
+  font-family: 'Sacramento', cursive;
+  font-size: 6em;
+}
 .one-third {
   width: 33.33%;
   float: left;
+}
+
+@media only screen and (max-width: 1110px) {
+  .one-third, .two-third, .one-half {
+    width: 100%;
+  }
+  .door-frame {
+    width: 60%;
+    margin-top: 50px;
+  }
 }

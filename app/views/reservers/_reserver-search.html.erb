@@ -1,7 +1,6 @@
 <div class="admin-form green-border t-marg">
-
   <%= form_tag(reservers_search_path, method:"get", class: "green-background query-form") do %>
-  <h2 class="form-titles">Search Clients</h2>
+  <h2 class="normal-heading">Search Clients</h2>
     <%= label_tag(:email_address, "Client Email", class:"std-form-label field-spacing") %>
     <%= text_field_tag(:email_address, "", class:"std-input field-spacing") %></br>
     <%= submit_tag("Search", class: "std-form-btn") %>
