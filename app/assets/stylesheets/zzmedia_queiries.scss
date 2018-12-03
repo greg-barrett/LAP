@@ -9,20 +9,21 @@
     margin-top: 50px;
   }
   .hamburger {
-    width: 70px;
-    height: 70px;
+    //width: 70px;
+    //height: 70px;
   }
   .hamburger-box {
-    width: 40px;
+  //  width: 40px;
  }
   .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
-    width: 40px;
-    height: 4px;
+    //width: 40px;
+  //  height: 4px;
   }
   .hamburger-inner::before {
-    top: -12px; }
+  //  top: -12px;
+}
   .hamburger-inner::after {
-    bottom: -12px;
+    //bottom: -12px;
   }
   .description-pane-padding {
     padding: 50px 0 50px 0;
@@ -112,6 +113,13 @@
   .profile-main {
     padding: 50px 0;
   }
+  .menu {
+
+    a{
+
+      font-size: 3em;
+    }
+  }
 
 }
 @media screen and (max-width: 600px) {
@@ -148,6 +156,18 @@
   }
   .split-form {
     width: 90%;
+  }
+  .expand {
+    width: 100%;
+  }
+  .menu {
+    a{
+      display: block;
+      width:50%;
+      margin:auto;
+      padding-left: 0px;
+      text-align: center;
+    }
   }
 }
 @media screen and (max-width: 500px) {
@@ -202,4 +222,5 @@
   #mini-head {
     font-size: 4em;
   }
+
 }
