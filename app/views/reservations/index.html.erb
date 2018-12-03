@@ -10,7 +10,7 @@
     <% if @past_reservations.any? %>
       <% @past_reservations.each do |reservation|  %>
         <%= link_to reservation_path(reservation.id) do  %>
-          <div class="search-form-frame green-border b-marg">
+          <div class="search-form-frame green-border b-marg " id="reserver-expander">
             <div class="upcoming-stays green-background">
               <% if is_admin?(current_reserver) %>
                 <p class="dates"><%= "Client: " + reservation.reserver.title+ " " + reservation.reserver.last_name %></p>
@@ -22,7 +22,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <div class="search-form-frame green-border b-marg">
+      <div class="search-form-frame green-border b-marg"  id="reserver-expander">
         <div class="upcoming-stays green-background">
           <p class="dates">There are no prior reservations.</p>
         </div>
@@ -35,7 +35,7 @@
     <% if @upcoming_reservations.any? %>
       <% @upcoming_reservations.each do |reservation|  %>
         <%= link_to reservation_path(reservation.id) do  %>
-          <div class="search-form-frame green-border b-marg">
+          <div class="search-form-frame green-border b-marg"  id="reserver-expander">
             <div class="upcoming-stays green-background">
               <% if is_admin?(current_reserver) %>
                 <p class="dates"><%= "Client: " + reservation.reserver.title+ " " + reservation.reserver.last_name %></p>
@@ -47,7 +47,7 @@
         <% end %>
       <% end %>
     <% else %>
-      <div class="search-form-frame green-border b-marg">
+      <div class="search-form-frame green-border b-marg"  id="reserver-expander">
         <div class="upcoming-stays green-background">
           <p class="dates">There are no future reservations.</p>
         </div>

@@ -1,7 +1,7 @@
 <article class="new-reserver-pane green-bkg-pale">
     <div class="green-border search-form-frame">
     <%= form_for @reserver, html: { class: "green-background edit_reserver_form"}  do |r| %>
-    <h2 class="med-heading">Edit Details</h2>
+    <h2 class="med-heading" id="mini-head">Edit Details</h2>
     <% if @reserver.errors.any? %>
       <div class="form-errors">
         <p>There is an issue with the data you submitted.</p>

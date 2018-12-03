@@ -8,7 +8,7 @@
 </section>
 <section class="profile-main">
   <section class="one-half">
-    <div class="search-form-frame green-border">
+    <div class="search-form-frame green-border" id="reserver-expander">
       <div class="upcoming-stays green-background">
         <h2 class="normal-heading"> Upcoming Stays</h2>
         <% @upcoming_reservations.each do |reservation|  %>
@@ -19,19 +19,19 @@
   </section>
 
   <section class="one-half">
-    <div class="option search-form-frame green-border">
+    <div class="option search-form-frame green-border" id="reserver-expander">
       <div class="option-content green-background">
         <h2 class="normal-heading"><%= link_to "Create a new booking", calendar_path(Date.today, :reserver_id => @reserver.id) %></h2>
       </div>
     </div>
 
-    <div class="option search-form-frame green-border">
+    <div class="option search-form-frame green-border" id="reserver-expander">
       <div class="option-content green-background">
         <h2 class="normal-heading"><%= link_to "All Reservations", reservations_path(:reserver_id => @reserver.id) %></h2>
       </div>
     </div>
 
-    <div class="option search-form-frame green-border">
+    <div class="option search-form-frame green-border" id="reserver-expander">
       <div class="option-content green-background">
         <h2 class="normal-heading"><%= link_to "Update my Details", edit_reserver_path(@reserver)  %></h2>
       </div>
