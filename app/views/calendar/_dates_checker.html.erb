@@ -1,0 +1,22 @@
+<%= form_tag(calendar_path, :method => "get", id: "search_form", class:"rose-background", remote:true) do %>
+<%= label_tag(:arrival_date, "Arrival Date", class: "std-form-label select-spacing") %></br>
+  <%= select_day(Date.tomorrow, field_name: 'day', prefix: 'arrival_date' )%>
+  <%= select_month(Date.tomorrow, field_name: 'month', prefix: 'arrival_date') %>
+  <%= select_year(Date.tomorrow, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'arrival_date') %></br>
+
+  <%= label_tag(:departure_date, "Departure Date", class: "std-form-label select-spacing") %></br>
+    <%= select_day(Date.tomorrow+1, field_name: 'day', prefix: 'departure_date') %>
+    <%= select_month(Date.tomorrow+1, field_name: 'month', prefix: 'departure_date') %>
+    <%= select_year(Date.tomorrow+1, :start_year => Date.today.year, :end_year => 1.years.from_now.year, field_name: 'year', prefix: 'departure_date') %></br>
+  <%= submit_tag "Search", class: "std-form-btn field-spacing" %>
+
+  <% if @arrival_date %>
+    <% if !@un_availability.blank? %>
+      <p class="search-message"><%= @un_availability %></p>
+    <% else %>
+      <p class="search-message"><%= "Those dates are available." %></p>
+      <%= link_to "Book Now", new_reserver_path(:arrival_date=> @arrival_date, :departure_date => @departure_date), class: "std-form-btn" if !current_reserver || is_admin?(current_reserver) %>
+      <%= link_to "Book Now", new_reservation_path, class: "std-form-btn" if current_reserver && !is_admin?(current_reserver) %>
+    <% end %>
+  <% end %>
+<% end %>

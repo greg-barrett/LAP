@@ -3,6 +3,7 @@ class CalendarController < ApplicationController
     redirect_to calendar_url(Date.today)
   end
   def show
+
     cookies.encrypted[:reserver_id]=params[:reserver_id] if !params[:reserver_id].blank?
     if params[:id].blank?
       @start_date=Date.today
@@ -21,8 +22,12 @@ class CalendarController < ApplicationController
       else
         @arrival_date=(params[:arrival_date][:year] + "-" + params[:arrival_date][:month] + "-" + params[:arrival_date][:day]).to_date
         @departure_date=(params[:departure_date][:year] + "-" + params[:departure_date][:month] + "-" + params[:departure_date][:day]).to_date
-        @un_availability=Reservation.where(arrival_date: @arrival_date..@departure_date).or(Reservation.where(departure_date: @arrival_date..@departure_date)).exists?
+        @un_availability= unavailable?
       end
+    end
+    respond_to do |format|
+      format.html
+      format.js
     end
 
   end
@@ -36,5 +41,19 @@ class CalendarController < ApplicationController
       occupied=occupied + range
     end
     return occupied
+  end
+
+  def unavailable?
+    if @arrival_date > @departure_date
+      return "Departure date must be after arrival date"
+    elsif  @departure_date - @arrival_date <2
+    return "Stays can't be less than two nights"
+    elsif @arrival_date <= Date.today || @departure_date <= Date.today+1
+      return "Bookings must be made one day in advance"
+    elsif Reservation.where(arrival_date: @arrival_date..@departure_date).or(Reservation.where(departure_date: @arrival_date..@departure_date)).exists?
+      return "Sorry those dates are unavailable"
+    else
+      return false
+    end
   end
 end

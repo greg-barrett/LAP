@@ -1,0 +1,4 @@
+var calArea = document.querySelector(".calendar-area");
+calArea.innerHTML="<%= escape_javascript(render('calendar/cal_table')) %>"
+var searchArea = document.querySelector(".s-f-c");
+searchArea.innerHTML="<%= escape_javascript(render('calendar/dates_checker')) %>"

@@ -1,0 +1,44 @@
+<section class="the-calendar">
+  <% start_date=@start_date || Date.today %>
+  <% date_range=(start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week).to_a %>
+  <div class="calendar-head">
+    <% unless start_date.last_month < Date.today %>
+      <%= link_to "Previous", calendar_url(start_date.last_month), remote: true %>
+    <% end %>
+    <h3><%= start_date.strftime("%B") %> <%= start_date.strftime("%Y") %></h3>
+    <% unless start_date.next_month > Date.today+365 %>
+      <%= link_to "Next", calendar_url(start_date.next_month), remote: true  %>
+    <% end %>
+
+  </div>
+  <table class="calendar-table">
+    <thead>
+      <% date_range.slice(0, 7).each do |day| %>
+      <th><%= day.strftime("%A") %></th>
+      <% end %>
+    </thead>
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+      <tr>
+        <% week.each do |day| %>
+          <% if @occupied.include? day  %>
+            <td class="occupied tooltip">
+              <P><%= day.day %></P>
+              <span class="tooltiptext">Un-Available</span>
+            </td>
+          <% else %>
+            <td class="available tooltip">
+              <P><%= day.day %></P>
+              <span class="tooltiptext">Available</span>
+            </td>
+          <% end %>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+  <%= link_to "Book Now", new_reserver_path, class: "book-btn" if !current_reserver || is_admin?(current_reserver) %>
+  <%= link_to "Book Now", new_reservation_path, class: "book-btn" if current_reserver && !is_admin?(current_reserver) %>
+</div>
+</section>
