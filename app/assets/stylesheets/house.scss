@@ -38,6 +38,7 @@ $body-font: 'Cormorant Garamond', serif;
 .one-half {
   width: 50%;
   float: left;
+  overflow: hidden;
 }
 .focus-description {
   position: relative;

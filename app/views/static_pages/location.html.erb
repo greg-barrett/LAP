@@ -5,15 +5,12 @@
         <h1 class="title">Location</h1>
       </div>
     </div>
-    <%= image_tag "church.jpg", id: "bk-home", alt: "Church in sunny french fields" %>
+    <%= image_tag "church.jpg", srcset: { "church_480.jpg" => "480w", "church_1200.jpg" => "1200w"}, id: "bk-home", alt: "Church in sunny french fields" %>
   </section>
-
-
-
 
   <section class="description-pane description-pane-padding">
     <div class="one-half">
-      <div class="focus-description">
+      <div class="focus-description" data-aos= "fade-up">
         <h2 class="med-heading">Le Charente</h2>
         <p>We are located in the rolling hills of the rural Charente.
           We are an eight hour rive from Calais and served by Limoge, Bordeux and other airports all nearby.
@@ -25,17 +22,18 @@
     </div>
 
     <div class="one-half std-background">
-      <%= image_tag "brantome_focus.jpg", class: "green-border", id: "room-img-sub", alt: "Buring fireplace in formal livingroom" %>
+      <%= image_tag "brantome_focus.jpg", srcset: { "brantome_focus_480.jpg" => "480w", "brantome_focus_1200.jpg" => "1200w"}, class: "green-border", id: "room-img-sub", alt: "Typcial french villiage", "data-aos"=> "fade-up" %>
+
     </div>
   </section>
 
   <section class="locale description-pane description-pane-padding">
     <div class="one-half std-background">
-      <%= image_tag "bordeaux_focus.jpg", class: "green-border", id: "room-img-sub", alt: "Buring fireplace in formal livingroom" %>
+      <%= image_tag "bordeaux_focus.jpg", srcset: { "bordeaux_focus_480.jpg" => "480w", "bordeaux_focus_1200.jpg" => "1200w"}, class: "green-border", id: "room-img-sub", alt: "Flowers in Bordeaux", "data-aos"=> "fade-up" %>
     </div>
 
     <div class="one-half">
-      <div class="focus-description">
+      <div class="focus-description" data-aos= "fade-up">
         <h2 class="med-heading">Bordeaux</h2>
         <p>Lots of information about Bordeaux
         </p>
@@ -45,7 +43,7 @@
 
   <section class="locale description-pane description-pane-padding">
     <div class="one-half">
-      <div class="focus-description">
+      <div class="focus-description" data-aos= "fade-up">
         <h2 class="med-heading">Lacanue</h2>
         <p>Lots of information about the beach
         </p>
@@ -53,17 +51,17 @@
     </div>
 
     <div class="one-half std-background">
-      <%= image_tag "beach_focus.jpg", class: "green-border", id: "room-img-sub", alt: "Buring fireplace in formal livingroom" %>
+      <%= image_tag "beach_focus.jpg", srcset: { "beach_focus_480.jpg" => "480w", "beach_focus_1200.jpg" => "1200w"}, class: "green-border", id: "room-img-sub", alt: "People walking up a sand dune", "data-aos"=> "fade-up" %>
     </div>
   </section>
 
   <section class="locale description-pane description-pane-padding">
     <div class="one-half std-background">
-      <%= image_tag "signs_focus.jpg", class: "green-border", id: "room-img-sub", alt: "Buring fireplace in formal livingroom" %>
+      <%= image_tag "signs_focus.jpg", srcset: { "signs_focus_480.jpg" => "480w", "signs_focus_1200.jpg" => "1200w"}, class: "green-border", id: "room-img-sub", alt: "French Road Signs", "data-aos"=> "fade-up" %>
     </div>
 
     <div class="one-half">
-      <div class="focus-description">
+      <div class="focus-description" data-aos= "fade-up">
         <h2 class="med-heading">Getting to us</h2>
         <p>You can drive fly, train or walk!
         </p>

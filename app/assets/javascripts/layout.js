@@ -11,4 +11,5 @@ document.addEventListener('turbolinks:load', function(){
       nav.classList.toggle("expand");
       // Do something else, like open/close menu
     });
+
 });
