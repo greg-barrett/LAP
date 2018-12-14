@@ -86,3 +86,9 @@ p {
   width: 33.33%;
   float: left;
 }
+.text-link {
+  font-weight: bold;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
