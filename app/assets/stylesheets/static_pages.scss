@@ -3,9 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .home {
   position: relative;
+
 }
 .hero {
   position: relative;
+
 }
 #bk-home {
   height: 100vh;
@@ -17,9 +19,13 @@
   position: absolute;
   display: inline-block;
   padding: 10px;
-  top: 50%;
-  left: 50%;
-  transform:translate(-50%, -50%);
+  bottom: 50%;
+  right: 50%;
+  -webkit-transform: translate(50%, 50%);
+           -moz-transform: translate(50%, 50%);
+           -ms-transform: translate(50%, 50%);
+           -o-transform: translate(50%, 50%);
+           transform: translate(50%, 50%);
 }
 /*holds the title and shows background*/
 .title-box {

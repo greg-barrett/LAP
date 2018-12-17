@@ -3,8 +3,7 @@ class CalendarController < ApplicationController
     redirect_to calendar_url(Date.today)
   end
   def show
-
-    cookies.encrypted[:reserver_id]=params[:reserver_id] if !params[:reserver_id].blank?
+    cookies.encrypted[:reserver_id]=params[:reserver_id] if !params[:reserver_id].blank? && is_admin?(current_reserver)
     if params[:id].blank?
       @start_date=Date.today
     else

@@ -16,6 +16,7 @@ class ReserverSessionsController < ApplicationController
 
   def destroy
     session[:reserver_id]=nil
+    cookies.delete :reserver_id if cookies.encrypted[:reserver_id]
     current_reserver
     flash[:notice]="You have successfully logged out"
     redirect_to root_url

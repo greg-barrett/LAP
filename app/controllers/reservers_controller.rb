@@ -40,7 +40,6 @@ class ReserversController < ApplicationController
       login unless logged_in?
       redirect_to @reservation
     else
-      flash.now[:alert]="There is a problem with the data you submitted"
       render :new
     end
 

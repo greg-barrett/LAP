@@ -1,6 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :is_logged_in?, only: [:show, :edit, :update, :new, :create]
   def new
+
     if params[:reserver_id].present?
       @reservation=Reserver.find(params[:reserver_id]).reservations.build
     else
@@ -35,7 +36,6 @@ class ReservationsController < ApplicationController
       return redirect_to @reservation
       #send email confirmation
     else
-      flash.now[:alert]="There is an issue with the data you submitted"
       render :edit
     end
 
@@ -82,7 +82,7 @@ class ReservationsController < ApplicationController
       redirect_to @reservation
       #send email confirmation
     else
-      flash.now[:alert]="There is a problem with the data you submitted"
+
       render :new
     end
 
@@ -99,13 +99,15 @@ class ReservationsController < ApplicationController
 
     if params[:reservation][:arrival_date] !=""
       @reservation=Reservation.find_by(arrival_date: params[:reservation][:arrival_date] )
-      @errors << "Couldn't find a reservation starting #{params[:reservation][:arrival_date].strftime("%A %d %B %Y")}." if !@reservation
+      date=params[:reservation][:arrival_date].to_date
+      @errors << "Couldn't find a reservation starting #{date.strftime("%A %d %B %Y")}." if !@reservation
       return redirect_to @reservation if @reservation
     end
 
     if params[:reservation][:departure_date] !=""
       @reservation=Reservation.find_by(departure_date: params[:reservation][:departure_date] )
-      @errors << "Couldn't find a reservation ending #{params[:reservation][:departure_date].strftime("%A %d %B %Y")}." if !@reservation
+      date=params[:reservation][:departure_date].to_date
+      @errors << "Couldn't find a reservation ending #{date.strftime("%A %d %B %Y")}." if !@reservation
       return redirect_to @reservation if @reservation
     end
 

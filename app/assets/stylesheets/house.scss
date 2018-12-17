@@ -15,11 +15,14 @@ $body-font: 'Cormorant Garamond', serif;
 .title-pane {
   height: 100vh;
   position: relative;
+
+
 }
 
 
 .room-pane {
   position: relative;
+
 }
 #room-img-main {
   width: 80%;
@@ -31,6 +34,7 @@ $body-font: 'Cormorant Garamond', serif;
 .description-pane {
   position: relative;
   overflow: auto;
+
 }
 .description-pane-padding {
   padding: 100px 0 100px 0;

@@ -6,7 +6,7 @@
       <div class="form-errors">
         <p>There is an issue with the data you submitted.</p>
         <% @reserver.errors.full_messages.each do |message| %>
-            <p><%= message %></p>
+            <p><%= message.gsub("Reservations base ", "") %></p>
         <% end %>
       </div>
     <% end %>
