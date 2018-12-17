@@ -38,6 +38,7 @@ class ReserversController < ApplicationController
       @reserver.save
       @reservation.save
       login unless logged_in?
+      ReservationMailer.create_reservation(@reservation).deliver_now
       redirect_to @reservation
     else
       render :new

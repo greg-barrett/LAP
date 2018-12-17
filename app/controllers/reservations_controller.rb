@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
       return render :edit
     end
     if  @reservation.update_attributes(arrival_date: arrival_date, departure_date: departure_date, fee: fee, notes: params[:reservation][:notes], party_size: params[:reservation][:party_size])
+      ReservationMailer.update_reservation(@reservation).deliver_now
       return redirect_to @reservation
       #send email confirmation
     else
@@ -79,6 +80,7 @@ class ReservationsController < ApplicationController
     @reservation.fee=fee
     @reservation.confirmed=true
     if @reservation.save
+      ReservationMailer.create_reservation(@reservation).deliver_now
       redirect_to @reservation
       #send email confirmation
     else
