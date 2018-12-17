@@ -4,7 +4,7 @@
       <h2><%= @reservation.reservation_number %></h2>
       <p>Arriving: <%= @reservation.arrival_date.strftime("%A %d %B %Y") %></p>
       <p>Departing: <%= @reservation.departure_date.strftime("%A %d %B %Y") %></p>
-      <p>Fee: <%= @reservation.fee %></p>
+      <p>Fee: £<%= @reservation.fee %></p>
       <p>Notes to the Host</p>
       <p><%= @reservation.notes %></p>
       <p><%= link_to "Ammend Reservation", edit_reservation_path(@reservation) %></p>
@@ -13,6 +13,8 @@
       <% else %>
         <p><%= link_to "My Account" , @reservation.reserver %></p>
       <% end %>
+      <p><%= link_to "Cancel Reservation", @reservation, method: :delete,
+                                    data: { confirm: "You sure you want to cancel this reservation?" } %></p>
     </div>
   </section>
 </article>

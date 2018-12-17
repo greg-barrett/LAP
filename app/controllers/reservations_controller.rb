@@ -65,6 +65,10 @@ class ReservationsController < ApplicationController
   end
 
   def destroy
+    @reservation=Reservation.find(params[:id])
+    @reservation.destroy
+    flash[:success]="The reservation has been cancelled"
+    redirect_to current_reserver
   end
 
   def create
