@@ -1,11 +1,11 @@
 <h2>Dear <%= @reserver.title %> <%= @reserver.last_name %>,</h2>
-<p>Your reservation number <%= @reservation.reservation_number %> has been updated.</p>
+<p>Your reservation, number: <%= @reservation.reservation_number %>, has been updated.</p>
 <h2>Reservation Details</h2>
-<p>Reservation Number<%= @reservation.reservation_number %></p>
+<p>Reservation Number: <%= @reservation.reservation_number %></p>
 <p>Arriving: <%= @reservation.arrival_date.strftime("%A %d %B %Y") %></p>
 <p>Departing: <%= @reservation.departure_date.strftime("%A %d %B %Y")%></p>
 <p>Fee: <%= @reservation.fee %></p>
 <p>Notes to the Host</p>
 <p>Notes: <%= @reservation.notes %></p>
 <p>Kind regards,</p>
-<p class="signed">Lesley & Mike</p>
+<p class="signed">Julie & Peter</p>

@@ -24,7 +24,7 @@
 
     <div class="option search-form-frame green-border" id="reserver-expander">
       <div class="option-content green-background l-pad">
-        <h2 class="normal-heading"> Upcoming Stays</h2>
+        <h2 class="normal-heading">Upcoming Stays</h2>
         <% @upcoming_reservations.each do |reservation|  %>
           <p class="dates"><%= link_to reservation.arrival_date.strftime("%A %d %B %Y"), reservation_path(reservation.id)  %></p>
         <% end %>
