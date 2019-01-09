@@ -9,7 +9,7 @@ class ReservationMailer < ApplicationMailer
     @reservation=reservation
     @reserver=@reservation.reserver
 
-    mail to: @reserver.email_address, subject: "Reservation at Les Abres Paresseux"
+    mail to: @reserver.email_address, subject: "Reservation at Les Arbres Paresseux"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -20,6 +20,6 @@ class ReservationMailer < ApplicationMailer
   def update_reservation(reservation)
     @reservation=reservation
     @reserver=@reservation.reserver
-    mail to: @reserver.email_address, subject: "Reservation at Les Abres Paresseux updated"
+    mail to: @reserver.email_address, subject: "Reservation at Les Arbres Paresseux updated"
   end
 end

@@ -12,9 +12,9 @@
     <% end %>
     <%= label_tag(:booking_reference, "Booking Reference", :class =>"std-form-label field-spacing") %></br>
     <%= text_field_tag(:booking_reference, "", class: "std-input field-spacing") %></br>
-    <%= label_tag(:arrival_date, "Arrival date", :class =>"std-form-label field-spacing") %></br>
+    <%= label_tag(:arrival_date, "Arrival Date", :class =>"std-form-label field-spacing") %></br>
     <%= date_field(:reservation, :arrival_date, class: "std-input field-spacing") %></br>
-    <%= label_tag(:departure_date, "Departure date", :class =>"std-form-label field-spacing") %></br>
+    <%= label_tag(:departure_date, "Departure Date", :class =>"std-form-label field-spacing") %></br>
     <%= date_field(:reservation, :departure_date, class: "std-input field-spacing") %></br>
     <%= submit_tag("Search", :class =>"std-form-btn") %>
   <% end %>

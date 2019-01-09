@@ -7,7 +7,7 @@
       <p>Fee: £<%= @reservation.fee %></p>
       <p>Notes to the Host</p>
       <p><%= @reservation.notes %></p>
-      <p><%= link_to "Ammend Reservation", edit_reservation_path(@reservation) %></p>
+      <p><%= link_to "Amend Reservation", edit_reservation_path(@reservation) %></p>
       <% if is_admin?(current_reserver) %>
         <p><%= link_to "Client: " + @reservation.reserver.title + " " + @reservation.reserver.last_name , @reservation.reserver %></p>
       <% else %>

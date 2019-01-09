@@ -20,24 +20,24 @@
         <%= r.label :title, class:"std-form-label select-spacing" %>
         <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
 
-        <%= r.label :first_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :first_name, "First Name", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :first_name, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :last_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :last_name, "Last Name", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :last_name, required: true, class:"std-input field-spacing" %><br />
-        <%= r.label :contact_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :contact_number, "Contact Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :contact_number, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :id_type, class:"std-form-label select-spacing" %>
+        <%= r.label :id_type, "ID Type", class:"std-form-label select-spacing" %>
         <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
 
-        <%= r.label :id_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :id_number, "ID Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :id_number, required: true, class:"std-input field-spacing" %><br />
         <h2>Home Address</h2>
-        <%= r.label :house_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :house_number, "House Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :house_number, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :street_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :street_name, "Street", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :street_name, required: true, class:"std-input field-spacing" %><br />
         <%= r.label :city, class:"std-form-label field-spacing" %><br />
         <%= r.text_field :city, required: true, class:"std-input field-spacing" %><br />
@@ -50,22 +50,22 @@
     <div class="one-half">
       <div class="split-form second-split">
         <h2>Account Details</h2>
-        <%= r.label :email_address, class:"std-form-label field-spacing" %><br />
+        <%= r.label :email_address, "Email", class:"std-form-label field-spacing" %><br />
         <%= r.email_field :email_address, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :email_address_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.label :email_address_confirmation, "Confirm Email", class:"std-form-label field-spacing" %><br />
         <%= r.email_field :email_address_confirmation, required: true, class:"std-input field-spacing" %><br />
         <%= r.label :password, class:"std-form-label field-spacing" %><br />
         <%= r.password_field :password, required: true, class:"std-input field-spacing" %><br />
-        <%= r.label :password_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.label :password_confirmation, "Confirm Password", class:"std-form-label field-spacing" %><br />
         <%= r.password_field :password_confirmation, required: true, class:"std-input field-spacing" %><br />
         <h2>Booking Information</h2>
         <%= r.fields_for @reservation do |f| %>
-          <%= f.label :Arrival_Date, class:"std-form-label select-spacing" %><br />
+          <%= f.label :Arrival_Date, "Arrival Date", class:"std-form-label select-spacing" %><br />
           <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true, :class=>"select-spacing" %><br />
-          <%= f.label :Departure_Date, class:"std-form-label select-spacing" %><br />
+          <%= f.label :Departure_Date, "Departure Date", class:"std-form-label select-spacing" %><br />
           <%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true %><br />
-          <%= f.label :party_size, class:"std-form-label select-spacing" %>
+          <%= f.label :party_size, "Party Size", class:"std-form-label select-spacing" %>
           <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true %><br />
 
           <%= f.label :notes, class:"std-form-label field-spacing" %>

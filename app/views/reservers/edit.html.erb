@@ -16,23 +16,23 @@
         <%= r.label :title, class:"std-form-label select-spacing" %>
         <%= r.select :title, ["Mr", "Miss", "Mrs", "Ms", "other" ], required: true%><br />
 
-        <%= r.label :first_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :first_name, "First Name", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :first_name, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :last_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :last_name, "Last Name", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :last_name, required: true, class:"std-input field-spacing" %><br />
-        <%= r.label :contact_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :contact_number, "Contact Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :contact_number, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :id_type, class:"std-form-label select-spacing" %>
+        <%= r.label :id_type, "ID Type", class:"std-form-label select-spacing" %>
         <%= r.select :id_type, ["Passport", "Drivers license" ], required: true %><br />
 
-        <%= r.label :id_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :id_number, "ID Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :id_number, required: true, class:"std-input field-spacing" %><br />
-        <%= r.label :house_number, class:"std-form-label field-spacing" %><br />
+        <%= r.label :house_number, "House Number", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :house_number, required: true, class:"std-input field-spacing" %><br />
 
-        <%= r.label :street_name, class:"std-form-label field-spacing" %><br />
+        <%= r.label :street_name, "Street", class:"std-form-label field-spacing" %><br />
         <%= r.text_field :street_name, required: true, class:"std-input field-spacing" %><br />
         <%= r.label :city, class:"std-form-label field-spacing" %><br />
         <%= r.text_field :city, required: true, class:"std-input field-spacing" %><br />
@@ -44,18 +44,18 @@
     </div>
     <div class="one-half">
       <div class="split-form second-split">
-        <%= r.label :email_address, class:"std-form-label field-spacing" %><br />
+        <%= r.label :email_address, "Email", class:"std-form-label field-spacing" %><br />
         <%= r.email_field :email_address, required: true, class:"std-input field-spacing" %><br />
-        <%= r.label :email_address_confirmation, class:"std-form-label field-spacing" %><br />
+        <%= r.label :email_address_confirmation, "Confirm Email", class:"std-form-label field-spacing" %><br />
         <%= r.email_field :email_address_confirmation, required: true, class:"std-input field-spacing" %><br />
 
         <%= r.label :password, "New Password", class:"std-form-label field-spacing" %><br />
-        <%= r.password_field :password, class:"std-input field-spacing" %><br />
-        <%= r.label :password_confirmation,"New Password Confirmation", class:"std-form-label field-spacing" %><br />
-        <%= r.password_field :password_confirmation, class:"std-input field-spacing" %><br />
+        <%= r.password_field :password, placeholder: "Leave blank if not changing password", class:"std-input field-spacing" %><br />
+        <%= r.label :password_confirmation, "Confirm New Password", class:"std-form-label field-spacing" %><br />
+        <%= r.password_field :password_confirmation, placeholder: "Leave blank if not changing password", class:"std-input field-spacing" %><br />
 
         <p>Please confirm your current password</p>
-        <%= r.label :current_password, class:"std-form-label field-spacing" %><br />
+        <%= r.label :current_password, "Current Password", class:"std-form-label field-spacing" %><br />
         <%= r.password_field :current_password, required: true, class:"std-input field-spacing" %><br />
 
         <%= r.submit "Update", class: "std-form-btn" %>

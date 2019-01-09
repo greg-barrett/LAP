@@ -14,11 +14,11 @@
         <% end %>
       <% end %>
       <%= f.hidden_field :reserver_id, value: @reservation.reserver_id %>
-      <%= f.label :Arrival_Date, class:"std-form-label field-spacing" %><br />
+      <%= f.label :Arrival_Date, "Arrival Date", class:"std-form-label field-spacing" %><br />
       <%= f.date_select :arrival_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1,  required: true, class:"std-input field-spacing" %><br />
-      <%= f.label :Departure_Date, class:"std-form-label field-spacing" %><br />
+      <%= f.label :Departure_Date, "Departure Date", class:"std-form-label field-spacing" %><br />
       <%= f.date_select :departure_date, :order =>[:day, :month, :year], :start_year => Date.today.year, :end_year => Date.today.year+1, required: true, class:"std-input field-spacing" %><br />
-        <%= f.label :party_size, class:"std-form-label field-spacing" %><br />
+        <%= f.label :party_size, "Party Size", class:"std-form-label field-spacing" %><br />
         <%= f.select :party_size, [1, 2, 3, 4, 5, 6 ], required: true, class:"std-input field-spacing" %><br />
 
         <%= f.label :notes, class:"std-form-label field-spacing" %><br />

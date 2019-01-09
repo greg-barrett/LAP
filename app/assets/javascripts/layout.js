@@ -9,7 +9,5 @@ document.addEventListener('turbolinks:load', function(){
       // Toggle class "is-active"
       hamburger.classList.toggle("isactive");
       nav.classList.toggle("expand");
-      // Do something else, like open/close menu
     });
-
 });
